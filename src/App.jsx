@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import Header from './components/Header/Header'
 import Cart from './pages/Cart'
 import Home from './pages/Home'
-import './scss/app.scss'
 
 const Wrapper = styled.div`
 	width: calc(100vw - 100px);

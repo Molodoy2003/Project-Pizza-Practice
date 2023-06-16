@@ -61,87 +61,86 @@ const PizzaPrice = styled.div`
 	line-height: 27px;
 	letter-spacing: 0.015em;
 `
-// const PizzaButton = styled.div`
-// 	display: inline-block;
-// 	background-color: #fe5f1e;
-// 	border-radius: 30px;
-// 	padding: 10px 20px;
-// 	min-width: 100px;
-// 	text-align: center;
-// 	cursor: pointer;
-// 	transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-// 	border: 1px solid transparent;
-// 	&,
-// 	span {
-// 		color: #fff;
-// 	}
-// `
-// const PizzaButton2 = styled(PizzaButton)`
-// 	background-color: #fff;
-// 	border-color: $orange;
-// 	&,
-// 	span {
-// 		color: $orange;
-// 	}
+const PizzaButton2 = styled.div`
+	display: inline-block;
+	background-color: #fe5f1e;
+	border-radius: 30px;
+	padding: 10px 20px;
+	min-width: 100px;
+	text-align: center;
+	cursor: pointer;
+	transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+	border: 1px solid transparent;
+	&,
+	span {
+		color: #fff;
+	}
+`
+const PizzaButton1 = styled(PizzaButton2)`
+	background-color: #fff;
+	border-color: #fe5f1e;
+	&,
+	span {
+		color: #fe5f1e;
+	}
 
-// 	svg {
-// 		path {
-// 			fill: $orange;
-// 		}
-// 	}
+	svg {
+		path {
+			fill: #fe5f1e;
+		}
+	}
 
-// 	&:hover {
-// 		background-color: $orange;
+	&:hover {
+		background-color: #fe5f1e;
 
-// 		&,
-// 		span {
-// 			color: #fff;
-// 		}
+		&,
+		span {
+			color: #fff;
+		}
 
-// 		svg {
-// 			path {
-// 				fill: #fff;
-// 			}
-// 		}
-// 	}
+		svg {
+			path {
+				fill: #fff;
+			}
+		}
+	}
+	&:active {
+		background-color: darken(#fe5f1e, 8%);
+	}
+`
+const PizzaButton = styled(PizzaButton1)`
+	svg {
+		margin-right: 2px;
+	}
 
-// 	&:active {
-// 		background-color: darken($orange, 8%);
-// 	}
-// `
-// const PizzaButton3 = styled(PizzaButton2)`
-// 	svg {
-// 		margin-right: 2px;
-// 	}
+	span {
+		font-weight: 600;
+		font-size: 16px;
+	}
 
-// 	span {
-// 		font-weight: 600;
-// 		font-size: 16px;
-// 	}
+	&:hover {
+		i {
+			background-color: #fff;
+			color: #fe5f1e;
+		}
+	}
 
-// 	&:hover {
-// 		i {
-// 			background-color: #fff;
-// 			color: $orange;
-// 		}
-// 	}
-
-// 	i {
-// 		display: inline-block;
-// 		border-radius: 30px;
-// 		background-color: $orange;
-// 		color: #fff;
-// 		font-weight: 600;
-// 		width: 22px;
-// 		height: 22px;
-// 		font-style: normal;
-// 		font-size: 13px;
-// 		line-height: 22px;
-// 		position: relative;
-// 		top: -1px;
-// 		left: 3px;
-// 	}
-// `
+	i {
+		display: inline-block;
+		border-radius: 30px;
+		background-color: #fe5f1e;
+		color: #fff;
+		font-weight: 600;
+		width: 22px;
+		height: 22px;
+		font-style: normal;
+		font-size: 13px;
+		line-height: 22px;
+		position: relative;
+		top: -1px;
+		left: 3px;
+	}
+`
 
 const PizzaBlock = ({ title, price, image, sizes, types }) => {
 	const [activeType, setActiveType] = useState(0)
@@ -178,7 +177,7 @@ const PizzaBlock = ({ title, price, image, sizes, types }) => {
 			</PizzaSelector>
 			<PizzaBottom>
 				<PizzaPrice>от {price} р.</PizzaPrice>
-				<div className='button button--outline button--add'>
+				<PizzaButton>
 					<svg
 						width='12'
 						height='12'
@@ -188,7 +187,7 @@ const PizzaBlock = ({ title, price, image, sizes, types }) => {
 					></svg>
 					<span>Добавить</span>
 					<i>0</i>
-				</div>
+				</PizzaButton>
 			</PizzaBottom>
 		</PizzaBlockStyles>
 	)
