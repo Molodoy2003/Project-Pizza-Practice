@@ -1,4 +1,147 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
+
+const PizzaBlockStyles = styled.div`
+	width: 280px;
+	text-align: center;
+	margin-bottom: 65px;
+	&:not(:nth-of-type(4n)) {
+		margin-right: 35px;
+	}
+`
+const PizzaImage = styled.img`
+	width: 260px;
+`
+const PizzaTitle = styled.h4`
+	font-size: 20px;
+	font-weight: 900;
+	letter-spacing: 1%;
+	margin-bottom: 20px;
+`
+const PizzaSelector = styled.div`
+	display: flex;
+	background-color: #dbdada;
+	border-radius: 10px;
+	flex-direction: column;
+	padding: 6px;
+
+	ul {
+		display: flex;
+		flex: 1;
+
+		&:first-of-type {
+			margin-bottom: 6px;
+		}
+
+		li {
+			padding: 8px;
+			flex: 1;
+			cursor: pointer;
+			font-weight: 600;
+			font-size: 14px;
+
+			&.active {
+				background: #ffffff;
+				box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+				border-radius: 5px;
+				cursor: auto;
+			}
+		}
+	}
+`
+const PizzaBottom = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
+`
+const PizzaPrice = styled.div`
+	font-weight: bold;
+	font-size: 22px;
+	line-height: 27px;
+	letter-spacing: 0.015em;
+`
+// const PizzaButton = styled.div`
+// 	display: inline-block;
+// 	background-color: #fe5f1e;
+// 	border-radius: 30px;
+// 	padding: 10px 20px;
+// 	min-width: 100px;
+// 	text-align: center;
+// 	cursor: pointer;
+// 	transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+// 	border: 1px solid transparent;
+// 	&,
+// 	span {
+// 		color: #fff;
+// 	}
+// `
+// const PizzaButton2 = styled(PizzaButton)`
+// 	background-color: #fff;
+// 	border-color: $orange;
+// 	&,
+// 	span {
+// 		color: $orange;
+// 	}
+
+// 	svg {
+// 		path {
+// 			fill: $orange;
+// 		}
+// 	}
+
+// 	&:hover {
+// 		background-color: $orange;
+
+// 		&,
+// 		span {
+// 			color: #fff;
+// 		}
+
+// 		svg {
+// 			path {
+// 				fill: #fff;
+// 			}
+// 		}
+// 	}
+
+// 	&:active {
+// 		background-color: darken($orange, 8%);
+// 	}
+// `
+// const PizzaButton3 = styled(PizzaButton2)`
+// 	svg {
+// 		margin-right: 2px;
+// 	}
+
+// 	span {
+// 		font-weight: 600;
+// 		font-size: 16px;
+// 	}
+
+// 	&:hover {
+// 		i {
+// 			background-color: #fff;
+// 			color: $orange;
+// 		}
+// 	}
+
+// 	i {
+// 		display: inline-block;
+// 		border-radius: 30px;
+// 		background-color: $orange;
+// 		color: #fff;
+// 		font-weight: 600;
+// 		width: 22px;
+// 		height: 22px;
+// 		font-style: normal;
+// 		font-size: 13px;
+// 		line-height: 22px;
+// 		position: relative;
+// 		top: -1px;
+// 		left: 3px;
+// 	}
+// `
 
 const PizzaBlock = ({ title, price, image, sizes, types }) => {
 	const [activeType, setActiveType] = useState(0)
@@ -6,10 +149,10 @@ const PizzaBlock = ({ title, price, image, sizes, types }) => {
 	const typeNames = ['тонкое', 'сырный борт']
 
 	return (
-		<div className='pizza-block'>
-			<img className='pizza-block__image' src={image} alt='Pizza' />
-			<h4 className='pizza-block__title'>{title}</h4>
-			<div className='pizza-block__selector'>
+		<PizzaBlockStyles>
+			<PizzaImage src={image} alt='Pizza' />
+			<PizzaTitle>{title}</PizzaTitle>
+			<PizzaSelector>
 				<ul>
 					{types.map((type, index) => (
 						<li
@@ -32,9 +175,9 @@ const PizzaBlock = ({ title, price, image, sizes, types }) => {
 						</li>
 					))}
 				</ul>
-			</div>
-			<div className='pizza-block__bottom'>
-				<div className='pizza-block__price'>от {price} р.</div>
+			</PizzaSelector>
+			<PizzaBottom>
+				<PizzaPrice>от {price} р.</PizzaPrice>
 				<div className='button button--outline button--add'>
 					<svg
 						width='12'
@@ -46,8 +189,8 @@ const PizzaBlock = ({ title, price, image, sizes, types }) => {
 					<span>Добавить</span>
 					<i>0</i>
 				</div>
-			</div>
-		</div>
+			</PizzaBottom>
+		</PizzaBlockStyles>
 	)
 }
 

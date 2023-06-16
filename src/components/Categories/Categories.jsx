@@ -1,7 +1,33 @@
-import React, { useState } from 'react'
+import React from 'react'
+import styled from 'styled-components'
 
+const CategoriesUl = styled.ul`
+	display: flex;
+`
+const CategoriesLi = styled.li`
+	background-color: #f9f9f9;
+	padding: 13px 30px;
+	border-radius: 30px;
+	margin-right: 10px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.1s ease-in-out;
 
-const Categories = ({categotyId, onChangeCategory}) => {
+	&:hover {
+		background-color: darken(#f9f9f9, 2%);
+	}
+
+	&:active {
+		background-color: darken(#f9f9f9, 5%);
+	}
+
+	&.active {
+		background-color: #282828;
+		color: #fff;
+	}
+`
+
+const Categories = ({ categotyId, onChangeCategory }) => {
 	const categories = [
 		'Все',
 		'Мясные',
@@ -12,18 +38,18 @@ const Categories = ({categotyId, onChangeCategory}) => {
 	]
 
 	return (
-		<div className='categories'>
-			<ul>
+		<div>
+			<CategoriesUl>
 				{categories.map((item, index) => (
-					<li
+					<CategoriesLi
 						key={index}
 						onClick={() => onChangeCategory(index)}
 						className={categotyId === index ? 'active' : ''}
 					>
 						{item}
-					</li>
+					</CategoriesLi>
 				))}
-			</ul>
+			</CategoriesUl>
 		</div>
 	)
 }

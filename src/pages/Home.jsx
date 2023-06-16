@@ -1,8 +1,23 @@
 import { useContext, useEffect, useState } from 'react'
+import styled from 'styled-components'
 import { AppContext } from '../App'
 import Categories from '../components/Categories/Categories'
 import PizzaBlock from '../components/PizzaBlock/PizzaBlock'
 import Sort from '../components/Sort/Sort'
+
+const ContentTop = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+`
+const ContentTitle = styled.h2`
+	margin: 35px 0;
+`
+const ContentItems = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+`
 
 const Home = () => {
 	const { searchValue } = useContext(AppContext)
@@ -33,18 +48,15 @@ const Home = () => {
 
 	return (
 		<>
-			<div className='content__top'>
+			<ContentTop>
 				<Categories
 					categotyId={categotyId}
 					onChangeCategory={id => setCategotyId(id)}
 				/>
-				<Sort
-					sortType={sortType}
-					onChangeSort={id => setSortType(id)}
-				/>
-			</div>
-			<h2 className='content__title'>Все пиццы</h2>
-			<div className='content__items'>
+				<Sort sortType={sortType} onChangeSort={id => setSortType(id)} />
+			</ContentTop>
+			<ContentTitle>Все пиццы</ContentTitle>
+			<ContentItems>
 				{items.map(item => (
 					<PizzaBlock
 						key={item.id}
@@ -55,7 +67,7 @@ const Home = () => {
 						types={item.types}
 					/>
 				))}
-			</div>
+			</ContentItems>
 		</>
 	)
 }

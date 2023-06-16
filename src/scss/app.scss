@@ -38,7 +38,7 @@ body {
 }
 
 .container {
-  width: $container-width;
+  width: 90%;
   margin: 0 auto;
 
   &--cart {
@@ -79,7 +79,6 @@ body {
     display: flex;
     align-items: center;
     cursor: pointer;
-    @include noselect();
 
     span {
       display: inline-block;

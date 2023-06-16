@@ -1,16 +1,15 @@
 import { Search as LogoSearch } from '@styled-icons/bootstrap/Search'
+import { Close as LogoClose } from '@styled-icons/evil/Close'
 import React, { useContext } from 'react'
-import { AiOutlineClose } from 'react-icons/ai'
 import styled from 'styled-components'
 import { AppContext } from '../../App'
-import styles from './Search.module.scss'
 
 const SearchInput = styled.input`
 	padding: 10px 40px;
 	width: 300px;
 	border-radius: 10px;
 	font-size: 16px;
-	margin-right: 296px;
+	margin-right: 310px;
 	font-weight: 600;
 	border: none;
 	&:focus {
@@ -20,7 +19,18 @@ const SearchInput = styled.input`
 const SearchImage = styled(LogoSearch)`
 	position: absolute;
 	opacity: 0.7;
-	left: 545px;
+	left: 535px;
+`
+
+const CloseImage = styled(LogoClose)`
+	cursor: pointer;
+	position: absolute;
+	left: 790px;
+	opacity: 0.5;
+	transition: all 0.3s ease;
+	&:hover {
+		opacity: 1;
+	}
 `
 
 const Search = () => {
@@ -28,7 +38,7 @@ const Search = () => {
 
 	return (
 		<>
-			<SearchImage size={15}/>
+			<SearchImage size={15} />
 			<SearchInput
 				value={searchValue}
 				type='text'
@@ -36,9 +46,8 @@ const Search = () => {
 				onChange={e => setSearchValue(e.target.value)}
 			/>
 			{searchValue && (
-				<AiOutlineClose
+				<CloseImage size={18}
 					onClick={() => setSearchValue('')}
-					className={styles.close}
 				/>
 			)}
 		</>
