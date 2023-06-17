@@ -1,0 +1,52 @@
+1. What is an array and how do you create one in JavaScript?
+2. What is an object and how do you create one in JavaScript?
+3. How do you access and modify the elements of an array or an object?
+4. How do you add and remove elements from an array or an object?
+5. How do you loop through an array or an object and perform some operation on each element?
+6. How do you use the built-in methods of arrays and objects, such as map, filter, reduce, sort, etc.?
+7. How do you compare two arrays or objects for equality?
+8. How do you copy or clone an array or an object?
+9. How do you use destructuring to assign values from an array or an object to variables?
+10. How do you use the spread operator (...) to combine or expand arrays or objects?
+
+
+1. Массив — это набор данных, в которой находится упорядоченный набор элементов и мы имеем произвольный доступ к каждому элементу массива. В массиве каждое значение хранится под определенным номером, который начинается с 0. Создание массива: let arr = new Array, let arr = [].
+
+2. Объект это набор свойств, каждое свойство состоит из имени и значения , значением свойства может быть функция , которую называют методом объекта.
+let obj = new Object, let obj = {}
+
+3. Доступ к элементу массива можно получить написав название массива и номер элемента, который хотим получить и если хотим изменить, после этого ставим = и меняем. 
+Чтобы получить доступ к значению объекта, то мы указываем название объекта и свойство через точку.
+
+4. Методы push, pop, shift , unshift
+В объекте чтобы добавить нужно написать название объекта и свойство которое хотим добавить, удаление: delete obj.name
+
+5. Чтобы обратиться к определенному элементу и выполнить определенные операции, нужно: obj[номер элемента] = …..
+
+6. Метод map вызывает колбэк функцию, которая применяется к каждому элементу массива и возвращает новый массив с новыми значениями
+ Метод filter вызывает колбэк функцию, которая применяется к каждому элементу массива, и если функция выполняется( если возвращается true)  то это значение записывается в новый массив
+ Метод reduce так же вызывается колбэк функцию, которая применяется к каждому элементу массива, и вторым элементов в reduce передается так называемый аккумулятор, в котором хранятся промежуточные значения или после каждой отработанной функции или стартовое значение аккумулятора.
+Метод sort отличается от map только тем, что тут не создается новый массив, а сортируется этот же.
+
+7. Для сравнений массива можем использовать stringify, тоесть преобразовать оба массива в строку JSON.stringify() и сравнить уже две строки.
+Или через цикл пройтись по каждому элементу одного массива, и вторым внутренним циклом сравнивать значения первого и второго массива.
+
+8. Для копирования объекта или массива можно использовать
+ Object.assign()  Object.assign({}, objName),
+  spread оператор const newObj = […oldObj]. 
+И через json.parse(json.stringify(obj))
+
+9. Для массива: 
+const arr = [1, 2, 3, 4]
+const [a, b, c, d] = arr
+ Для объекта 
+const obj = {name: “Danik”, hobby: football}
+const {name, hobby} = obj
+
+10. С помощью spread оператора можно объединять массивы или объекты 
+const arr = […]
+const arr2 = […]
+const res = […arr, …arr2]
+Так же можем добавлять новые свойства 
+const obj = {….}
+const res = {…obj, age: 20}
