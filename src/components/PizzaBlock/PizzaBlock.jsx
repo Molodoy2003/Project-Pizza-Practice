@@ -142,10 +142,16 @@ const PizzaButton = styled(PizzaButton1)`
 	}
 `
 
-const PizzaBlock = ({ title, price, image, sizes, types }) => {
+const PizzaBlock = ({ title, price, image, sizes, types, onPlus}) => {
 	const [activeType, setActiveType] = useState(0)
 	const [activeSize, setActiveSize] = useState(0)
+	const [count, setCount] = useState(0)
 	const typeNames = ['тонкое', 'сырный борт']
+
+	const onClickPlus = () => {
+		onPlus()
+		setCount(count + 1)
+	}
 
 	return (
 		<PizzaBlockStyles>
@@ -177,7 +183,7 @@ const PizzaBlock = ({ title, price, image, sizes, types }) => {
 			</PizzaSelector>
 			<PizzaBottom>
 				<PizzaPrice>от {price} р.</PizzaPrice>
-				<PizzaButton>
+				<PizzaButton onClick={onClickPlus}>
 					<svg
 						width='12'
 						height='12'
@@ -186,7 +192,7 @@ const PizzaBlock = ({ title, price, image, sizes, types }) => {
 						xmlns='http://www.w3.org/2000/svg'
 					></svg>
 					<span>Добавить</span>
-					<i>0</i>
+					<i>{count}</i>
 				</PizzaButton>
 			</PizzaBottom>
 		</PizzaBlockStyles>

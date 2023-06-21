@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import { VscChromeClose } from "react-icons/vsc"
 
-const CartStyles = styled.div`
+
+const CartStl = styled.div`
 	display: flex;
 	width: 100%;
 	border-top: 1px solid #f6f6f6;
@@ -13,10 +15,9 @@ const CartImg = styled.div`
 	align-items: center;
 	margin-right: 15px;
 	width: 10%;
-
 	img {
-		width: 80px;
-		height: 80px;
+		width: 85px;
+		height: 85px;
 	}
 `
 const PizzaImage = styled.img`
@@ -29,7 +30,7 @@ const CartInfo = styled.div`
 	width: 40%;
 
 	h3 {
-		font-weight: bold;
+		font-weight: 800;
 		font-size: 22px;
 		line-height: 27px;
 		letter-spacing: 0.01em;
@@ -45,7 +46,6 @@ const CartCount = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	width: 13%;
-
 	&-minus {
 		svg {
 			path:first-of-type {
@@ -53,8 +53,8 @@ const CartCount = styled.div`
 			}
 		}
 	}
-
 	b {
+		font-weight: 800;
 		font-size: 22px;
 	}
 `
@@ -63,9 +63,8 @@ const CartPrice = styled.div`
 	align-items: center;
 	justify-content: center;
 	width: 33%;
-
 	b {
-		font-weight: bold;
+		font-weight: 800;
 		font-size: 22px;
 		letter-spacing: 0.01em;
 	}
@@ -74,7 +73,7 @@ const CartPrice = styled.div`
 
 const CartItem = () => {
 	return (
-		<CartStyles>
+		<CartStl>
 			<CartImg>
 				<PizzaImage
 					src='https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg'
@@ -91,7 +90,8 @@ const CartItem = () => {
 			<CartPrice>
 				<b>770 р.</b>
 			</CartPrice>
-		</CartStyles>
+			<VscChromeClose style={{marginTop: '34px', cursor: 'pointer'}}/>
+		</CartStl>
 	)
 }
 

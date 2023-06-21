@@ -1,178 +1,119 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { VscChromeClose } from 'react-icons/vsc'
 import styled from 'styled-components'
-import CartItem from '../components/CartItem/CartItem'
+import CartBottom from '../components/CartBottom/CartBottom'
+import CartTop from '../components/CartTop/CartTop'
 
 const CartStyles = styled.div`
 	max-width: 820px;
 	margin: 90px auto;
 `
-const CartTop = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-`
-const CartTitle = styled.h2`
-	display: flex;
-	align-items: center;
-	font-size: 32px;
-	font-weight: 800;
-	svg {
-		position: relative;
-		top: -2px;
-		width: 30px;
-		height: 30px;
-		margin-right: 10px;
-		path {
-			stroke: #232323;
-			stroke-width: 1.9;
-		}
-	}
-`
-const CartClear = styled.div`
-	display: flex;
-	align-items: center;
-	cursor: pointer;
 
-	span {
-		display: inline-block;
-		margin-left: 7px;
-		color: #b6b6b6;
-		font-size: 18px;
-	}
-
-	span,
-	svg,
-	path {
-		transition: all $duration ease-in-out;
-	}
-
-	&:hover {
-		svg {
-			path {
-				stroke: darken($color: #b6b6b6, $amount: 50);
-			}
-		}
-		span {
-			color: darken($color: #b6b6b6, $amount: 50);
-		}
-	}
-`
 const CartItems = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 `
-const CartBottom = styled.div`
-	margin: 50px 0;
-`
-const CartDetails = styled.div`
+
+const CartStl = styled.div`
 	display: flex;
-	justify-content: space-between;
+	width: 100%;
+	border-top: 1px solid #f6f6f6;
+	padding-top: 30px;
+	margin-top: 30px;
+`
+const CartImg = styled.div`
+	display: flex;
+	align-items: center;
+	margin-right: 15px;
+	width: 10%;
+	img {
+		width: 85px;
+		height: 85px;
+	}
+`
+const PizzaImage = styled.img`
+	width: 100px;
+`
+const CartInfo = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 40%;
 
-	span {
+	h3 {
+		font-weight: 800;
 		font-size: 22px;
+		line-height: 27px;
+		letter-spacing: 0.01em;
+	}
 
-		&:last-of-type {
-			b {
-				color: $orange;
+	p {
+		font-size: 18px;
+		color: #8d8d8d;
+	}
+`
+const CartCount = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 13%;
+	&-minus {
+		svg {
+			path:first-of-type {
+				display: none;
 			}
 		}
 	}
-`
-const CartButtonPay1 = styled.div`
-	display: inline-block;
-	background-color: #fe5f1e;
-	border-radius: 30px;
-	padding: 10px 20px;
-	min-width: 100px;
-	text-align: center;
-	cursor: pointer;
-	transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-	border: 1px solid transparent;
-	&,
-	span {
-		color: #fff;
+	b {
+		font-weight: 800;
+		font-size: 22px;
 	}
 `
-const CartButtonPay = styled(CartButtonPay1)`
-	font-size: 16px;
-	font-weight: 600;
-	width: 210px;
-	padding: 16px;
-`
-const CartBottomButtons = styled.div`
+const CartPrice = styled.div`
 	display: flex;
-	justify-content: space-between;
-	margin-top: 40px;
+	align-items: center;
+	justify-content: center;
+	width: 33%;
+	b {
+		font-weight: 800;
+		font-size: 22px;
+		letter-spacing: 0.01em;
+	}
 `
 
-const Cart = () => {
+const Cart = ({ cartItems, setCartItems }) => {
+	const onRemovePizza = id => {
+		axios.delete(`https://647efc54c246f166da8fd2c1.mockapi.io/cart/${id}`)
+		setCartItems(prev => prev.filter(item => item.id !== id))
+	}
+
 	return (
 		<CartStyles>
-			<CartTop>
-				<CartTitle>
-					<svg
-						width='18'
-						height='18'
-						viewBox='0 0 18 18'
-						fill='none'
-						xmlns='http://www.w3.org/2000/svg'
-					></svg>
-					Корзина
-				</CartTitle>
-				<CartClear>
-					<svg
-						width='20'
-						height='20'
-						viewBox='0 0 20 20'
-						fill='none'
-						xmlns='http://www.w3.org/2000/svg'
-					></svg>
-
-					<span>Очистить корзину</span>
-				</CartClear>
-			</CartTop>
+			<CartTop/>
 			<CartItems>
-				<CartItem />
-				<CartItem />
+				{cartItems.map(item => (
+					<CartStl>
+						<CartImg>
+							<PizzaImage src={item.imageUrl} alt='Pizza' />
+						</CartImg>
+						<CartInfo>
+							<h3>{item.title}</h3>
+							{/* <p>тонкое тесто, 26 см.</p> */}
+						</CartInfo>
+						<CartCount>{/* <b>2</b> */}</CartCount>
+						<CartPrice>
+							<b>{item.price} р.</b>
+						</CartPrice>
+						<VscChromeClose
+							onClick={() => onRemovePizza(item.id)}
+							style={{ marginTop: '34px', cursor: 'pointer' }}
+						/>
+					</CartStl>
+				))}
 			</CartItems>
-			<CartBottom>
-				<CartDetails>
-					<span>
-						{' '}
-						Всего пицц: <b>4 шт.</b>{' '}
-					</span>
-					<span>
-						{' '}
-						Сумма заказа: <b>900 р.</b>{' '}
-					</span>
-				</CartDetails>
-				<CartBottomButtons>
-					<Link to='/' class='button button--outline button--add go-back-btn'>
-						<svg
-							width='8'
-							height='14'
-							viewBox='0 0 8 14'
-							fill='none'
-							xmlns='http://www.w3.org/2000/svg'
-						>
-							<path
-								d='M7 13L1 6.93015L6.86175 1'
-								stroke='#D3D3D3'
-								stroke-width='1.5'
-								stroke-linecap='round'
-								stroke-linejoin='round'
-							></path>
-						</svg>
-
-						<span>Вернуться назад</span>
-					</Link>
-					<CartButtonPay>
-						<span>Оплатить сейчас</span>
-					</CartButtonPay>
-				</CartBottomButtons>
-			</CartBottom>
+			<CartBottom cartItems={cartItems}/>
 		</CartStyles>
 	)
 }

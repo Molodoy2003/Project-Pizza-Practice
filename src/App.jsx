@@ -1,9 +1,8 @@
-import React, { createContext, useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import React, { createContext, useContext, useState } from 'react'
 import styled from 'styled-components'
 import Header from './components/Header/Header'
-import Cart from './pages/Cart'
-import Home from './pages/Home'
+import { HomeContext } from './pages/Home'
+import Routing from './routing/Routing'
 
 const Wrapper = styled.div`
 	width: calc(100vw - 100px);
@@ -25,17 +24,20 @@ export const AppContext = createContext()
 
 const App = () => {
 	const [searchValue, setSearchValue] = useState('')
+	const [cartItems, setCartItems] = useState([])
 
 	return (
-		<AppContext.Provider value={{ searchValue, setSearchValue }}>
+		<AppContext.Provider
+			value={{ searchValue, setSearchValue, cartItems, setCartItems }}
+		>
 			<Wrapper>
 				<Header />
 				<Content>
 					<Container>
-						<Routes>
-							<Route path='/' element={<Home />} />
-							<Route path='/cart' element={<Cart />} />
-						</Routes>
+						<Routing
+							cartItems={cartItems}
+							setCartItems={setCartItems}
+						/>
 					</Container>
 				</Content>
 			</Wrapper>

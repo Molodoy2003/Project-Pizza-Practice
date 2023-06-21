@@ -1,4 +1,5 @@
-import { useContext, useEffect, useState } from 'react'
+import axios from 'axios'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { AppContext } from '../App'
 import Categories from '../components/Categories/Categories'
@@ -19,32 +20,37 @@ const ContentItems = styled.div`
 	justify-content: space-between;
 `
 
-const Home = () => {
+const Home = ({ cartItems, setCartItems }) => {
 	const { searchValue } = useContext(AppContext)
 	const [items, setItems] = useState([])
 	const [sortType, setSortType] = useState({
 		name: 'популярности',
-		property: 'rating'
+		property: 'rating',
 	})
 	const [categotyId, setCategotyId] = useState(0)
 
 	useEffect(() => {
-		fetch(
-			`https://647efc54c246f166da8fd2c1.mockapi.io/items?${
-				categotyId > 0 ? `category=${categotyId}` : ''
-			}&sortBy=${sortType.property}&order=desc${
-				searchValue ? `&search=${searchValue}` : ''
-			}`
-		)
+		axios
+			.get(
+				`https://647efc54c246f166da8fd2c1.mockapi.io/items?${
+					categotyId > 0 ? `category=${categotyId}` : ''
+				}&sortBy=${sortType.property}&order=desc${
+					searchValue ? `&search=${searchValue}` : ''
+				}`
+			)
 			.then(res => {
-				return res.json()
+				setItems(res.data)
 			})
-			.then(arr => {
-				console.log(arr)
-				setItems(arr)
-			})
+		axios.get('https://647efc54c246f166da8fd2c1.mockapi.io/cart').then(res => {
+			setCartItems(res.data)
+		})
 		window.scrollTo(0, 0)
 	}, [categotyId, sortType, searchValue])
+
+	const onAddToPizza = obj => {
+		axios.post('https://647efc54c246f166da8fd2c1.mockapi.io/cart', obj)
+		setCartItems(prev => [...prev, obj])
+	}
 
 	return (
 		<>
@@ -65,6 +71,7 @@ const Home = () => {
 						image={item.imageUrl}
 						sizes={item.sizes}
 						types={item.types}
+						onPlus={() => onAddToPizza(item)}
 					/>
 				))}
 			</ContentItems>
