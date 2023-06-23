@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { AppContext } from '../App'
 import Categories from '../components/Categories/Categories'
