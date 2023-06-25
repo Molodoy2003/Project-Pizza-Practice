@@ -19,7 +19,7 @@ const SearchInput = styled.input`
 const SearchImage = styled(LogoSearch)`
 	position: absolute;
 	opacity: 0.7;
-	left: 535px;
+	left: 618px;
 `
 
 const CloseImage = styled(LogoClose)`

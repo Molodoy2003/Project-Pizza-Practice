@@ -1,10 +1,12 @@
 import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { AppContext } from '../App'
 import Categories from '../components/Categories/Categories'
 import PizzaBlock from '../components/PizzaBlock/PizzaBlock'
 import Sort from '../components/Sort/Sort'
+import { setCategoryId } from '../redux/slices/filterSlice'
 
 const ContentTop = styled.div`
 	display: flex;
@@ -21,19 +23,26 @@ const ContentItems = styled.div`
 `
 
 const Home = ({ cartItems, setCartItems }) => {
+	const categoryId = useSelector(state => state.filterSlice.categoryId)
+	const dispatch = useDispatch()
+
+	const onChangeCategory = (id) => {
+		dispatch(setCategoryId(id))
+	}
+
 	const { searchValue } = useContext(AppContext)
 	const [items, setItems] = useState([])
 	const [sortType, setSortType] = useState({
 		name: 'популярности',
 		property: 'rating',
 	})
-	const [categotyId, setCategotyId] = useState(0)
+	// const [categoryId, setCategoryId] = useState(0)
 
 	useEffect(() => {
 		axios
 			.get(
 				`https://647efc54c246f166da8fd2c1.mockapi.io/items?${
-					categotyId > 0 ? `category=${categotyId}` : ''
+					categoryId > 0 ? `category=${categoryId}` : ''
 				}&sortBy=${sortType.property}&order=desc${
 					searchValue ? `&search=${searchValue}` : ''
 				}`
@@ -45,7 +54,7 @@ const Home = ({ cartItems, setCartItems }) => {
 			setCartItems(res.data)
 		})
 		window.scrollTo(0, 0)
-	}, [categotyId, sortType, searchValue])
+	}, [categoryId, sortType, searchValue])
 
 	const onAddToPizza = obj => {
 		axios.post('https://647efc54c246f166da8fd2c1.mockapi.io/cart', obj)
@@ -56,8 +65,8 @@ const Home = ({ cartItems, setCartItems }) => {
 		<>
 			<ContentTop>
 				<Categories
-					categotyId={categotyId}
-					onChangeCategory={id => setCategotyId(id)}
+					categoryId={categoryId}
+					onChangeCategory={onChangeCategory}
 				/>
 				<Sort sortType={sortType} onChangeSort={id => setSortType(id)} />
 			</ContentTop>

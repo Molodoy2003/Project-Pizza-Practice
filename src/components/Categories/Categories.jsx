@@ -27,7 +27,7 @@ const CategoriesLi = styled.li`
 	}
 `
 
-const Categories = ({ categotyId, onChangeCategory }) => {
+const Categories = ({ categoryId, onChangeCategory }) => {
 	const categories = [
 		'Все',
 		'Мясные',
@@ -44,7 +44,7 @@ const Categories = ({ categotyId, onChangeCategory }) => {
 					<CategoriesLi
 						key={index}
 						onClick={() => onChangeCategory(index)}
-						className={categotyId === index ? 'active' : ''}
+						className={categoryId === index ? 'active' : ''}
 					>
 						{item}
 					</CategoriesLi>

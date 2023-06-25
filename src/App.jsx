@@ -1,7 +1,8 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useState } from 'react'
+import { BrowserRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import Header from './components/Header/Header'
-import { HomeContext } from './pages/Home'
+import Global from './global'
 import Routing from './routing/Routing'
 
 const Wrapper = styled.div`
@@ -27,21 +28,21 @@ const App = () => {
 	const [cartItems, setCartItems] = useState([])
 
 	return (
-		<AppContext.Provider
-			value={{ searchValue, setSearchValue, cartItems, setCartItems }}
-		>
-			<Wrapper>
-				<Header />
-				<Content>
-					<Container>
-						<Routing
-							cartItems={cartItems}
-							setCartItems={setCartItems}
-						/>
-					</Container>
-				</Content>
-			</Wrapper>
-		</AppContext.Provider>
+		<BrowserRouter>
+			<Global />
+			<AppContext.Provider
+				value={{ searchValue, setSearchValue, cartItems, setCartItems }}
+			>
+				<Wrapper>
+					<Header />
+					<Content>
+						<Container>
+							<Routing cartItems={cartItems} setCartItems={setCartItems} />
+						</Container>
+					</Content>
+				</Wrapper>
+			</AppContext.Provider>
+		</BrowserRouter>
 	)
 }
 
