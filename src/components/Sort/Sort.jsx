@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { setSortType } from '../../redux/slices/filterSlice'
 
 const SortStyles = styled.div`
 	position: relative;
@@ -51,16 +53,21 @@ const SortPopup = styled.div`
 	}
 `
 
-const Sort = ({ sortType, onChangeSort }) => {
-	const [open, setOpen] = useState(false)
-	const sorts = [
-		{ name: 'популярности', property: 'rating' },
-		{ name: 'цене', property: 'price' },
-		{ name: 'алфавиту', property: 'title' }
-	]
+const sorts = [
+	{ name: 'популярности', property: 'rating' },
+	{ name: 'цене', property: 'price' },
+	{ name: 'алфавиту', property: 'title' },
+]
 
-	const onClickSort = index => {
-		onChangeSort(index)
+
+const Sort = () => {
+	const sortType = useSelector(state => state.filterSlice.sort)
+	const dispatch = useDispatch()
+
+	const [open, setOpen] = useState(false)
+
+	const onClickSort = obj => {
+		dispatch(setSortType(obj))
 		setOpen(false)
 	}
 

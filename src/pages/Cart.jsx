@@ -1,9 +1,10 @@
-import React from 'react'
 import axios from 'axios'
+import React from 'react'
 import { VscChromeClose } from 'react-icons/vsc'
 import styled from 'styled-components'
 import CartBottom from '../components/CartBottom/CartBottom'
 import CartTop from '../components/CartTop/CartTop'
+import { onRemovePizza } from '../services/requests.js'
 
 const CartStyles = styled.div`
 	max-width: 820px;
@@ -84,14 +85,10 @@ const CartPrice = styled.div`
 `
 
 const Cart = ({ cartItems, setCartItems }) => {
-	const onRemovePizza = id => {
-		axios.delete(`https://647efc54c246f166da8fd2c1.mockapi.io/cart/${id}`)
-		setCartItems(prev => prev.filter(item => item.id !== id))
-	}
 
 	return (
 		<CartStyles>
-			<CartTop/>
+			<CartTop />
 			<CartItems>
 				{cartItems.map(item => (
 					<CartStl>
@@ -100,20 +97,18 @@ const Cart = ({ cartItems, setCartItems }) => {
 						</CartImg>
 						<CartInfo>
 							<h3>{item.title}</h3>
-							{/* <p>тонкое тесто, 26 см.</p> */}
 						</CartInfo>
-						<CartCount>{/* <b>2</b> */}</CartCount>
 						<CartPrice>
 							<b>{item.price} р.</b>
 						</CartPrice>
 						<VscChromeClose
-							onClick={() => onRemovePizza(item.id)}
+							onClick={() => onRemovePizza(item.id, setCartItems)}
 							style={{ marginTop: '34px', cursor: 'pointer' }}
 						/>
 					</CartStl>
 				))}
 			</CartItems>
-			<CartBottom cartItems={cartItems}/>
+			<CartBottom cartItems={cartItems} />
 		</CartStyles>
 	)
 }

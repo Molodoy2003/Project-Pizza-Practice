@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { setCategoryId } from '../../redux/slices/filterSlice.js'
+import { useDispatch, useSelector } from 'react-redux'
 
 const CategoriesUl = styled.ul`
 	display: flex;
@@ -27,7 +29,14 @@ const CategoriesLi = styled.li`
 	}
 `
 
-const Categories = ({ categoryId, onChangeCategory }) => {
+const Categories = () => {
+	const categoryId = useSelector(state => state.filterSlice.categoryId)
+	const dispatch = useDispatch()
+
+	const onChangeCategory = (id) => {
+		dispatch(setCategoryId(id))
+	}
+
 	const categories = [
 		'Все',
 		'Мясные',
