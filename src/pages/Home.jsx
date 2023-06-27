@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
@@ -46,11 +45,7 @@ const Home = ({ setCartItems }) => {
 				{items.map(item => (
 					<PizzaBlock
 						key={item.id}
-						title={item.title}
-						price={item.price}
-						image={item.imageUrl}
-						sizes={item.sizes}
-						types={item.types}
+						{...item}
 						onPlus={() => onAddToPizza(item, setCartItems)}
 					/>
 				))}

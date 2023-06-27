@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { VscChromeClose } from "react-icons/vsc"
-
+import { CloseCircle as CloseItem } from '@styled-icons/ionicons-outline/CloseCircle'
+// import { useSelector, useDispatch } from 'react-redux'
+// import { removePizza } from '../../redux/slices/cartSlice'
 
 const CartStl = styled.div`
 	display: flex;
@@ -69,28 +70,37 @@ const CartPrice = styled.div`
 		letter-spacing: 0.01em;
 	}
 `
+const CloseIcon = styled(CloseItem)`
+	cursor: pointer;
+	opacity: 0.3;
+	transition: all .3s ease;
+	&:hover {
+		opacity: 1;	
+	}
+`
 
 
-const CartItem = () => {
+const CartItem = ({id, title, price, imageUrl}) => {
+	// const dispatch = useDispatch()
+
+	// const onClickRemovePizza = () => {
+	// 	dispatch(removePizza(id))
+	// }
+
 	return (
 		<CartStl>
 			<CartImg>
 				<PizzaImage
-					src='https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg'
-					alt='Pizza'
+					src={imageUrl}
 				/>
 			</CartImg>
 			<CartInfo>
-				<h3>Сырный цыпленок</h3>
-				<p>тонкое тесто, 26 см.</p>
+				<h3>{title}</h3>
 			</CartInfo>
-			<CartCount>
-				<b>2</b>
-			</CartCount>
 			<CartPrice>
-				<b>770 р.</b>
+				<b>{price} р.</b>
 			</CartPrice>
-			<VscChromeClose style={{marginTop: '34px', cursor: 'pointer'}}/>
+			<CloseIcon  size={28}/>
 		</CartStl>
 	)
 }

@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+// import { useDispatch, useSelector } from 'react-redux'
+// import { addPizza } from '../../redux/slices/cartSlice.js'
+
 
 const PizzaBlockStyles = styled.div`
 	width: 280px;
@@ -142,11 +145,12 @@ const PizzaButton = styled(PizzaButton1)`
 	}
 `
 
-const PizzaBlock = ({ title, price, image, sizes, types, onPlus}) => {
+const PizzaBlock = ({ id, title, price, imageUrl, sizes, types, onPlus}) => {
 	const [activeType, setActiveType] = useState(0)
 	const [activeSize, setActiveSize] = useState(0)
 	const [count, setCount] = useState(0)
 	const typeNames = ['тонкое', 'сырный борт']
+	// const dispatch = useDispatch()
 
 	const onClickPlus = () => {
 		onPlus()
@@ -155,7 +159,7 @@ const PizzaBlock = ({ title, price, image, sizes, types, onPlus}) => {
 
 	return (
 		<PizzaBlockStyles>
-			<PizzaImage src={image} alt='Pizza' />
+			<PizzaImage src={imageUrl} alt='Pizza' />
 			<PizzaTitle>{title}</PizzaTitle>
 			<PizzaSelector>
 				<ul>

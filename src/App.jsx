@@ -34,7 +34,7 @@ const App = () => {
 				value={{ searchValue, setSearchValue, cartItems, setCartItems }}
 			>
 				<Wrapper>
-					<Header />
+					<Header cartItems={cartItems}/>
 					<Content>
 						<Container>
 							<Routing cartItems={cartItems} setCartItems={setCartItems} />

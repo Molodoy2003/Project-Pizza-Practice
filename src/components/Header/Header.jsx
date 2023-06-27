@@ -3,6 +3,7 @@ import { BsCart3 } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Search from '../Search/Search'
+// import { useSelector } from 'react-redux'
 
 const HeaderStyles = styled.div`
 	border-bottom: 1px solid #f6f6f6;
@@ -77,7 +78,9 @@ const ButtonDelimiter = styled.div`
 	margin-right: 14px;
 `
 
-const Header = () => {
+const Header = ({ cartItems }) => {
+	// const { totalPrice, items } = useSelector(state => state.cartSlice)
+
 	return (
 		<HeaderStyles>
 			<HeaderContainer>
@@ -93,10 +96,10 @@ const Header = () => {
 				<Search />
 				<div>
 					<HeaderButton to='/cart'>
-						<span>520 р.</span>
+						<span>0 р.</span>
 						<ButtonDelimiter></ButtonDelimiter>
 						<BsCart3 />
-						<span>3</span>
+						<span>{cartItems.length}</span>
 					</HeaderButton>
 				</div>
 			</HeaderContainer>

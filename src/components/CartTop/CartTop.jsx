@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { onClearCart } from '../../services/requests'
 
 const CartTopStyles = styled.div`
 	display: flex;
@@ -27,22 +28,27 @@ const CartClear = styled.div`
 	display: flex;
 	align-items: center;
 	cursor: pointer;
-
+	font-weight: 700;
 	span {
 		display: inline-block;
-		margin-left: 7px;
 		color: #b6b6b6;
 		font-size: 18px;
-	}
-
-	span,
-	svg,
-	path {
-		transition: all 0.15s ease-in-out;
+		transition: all 0.5s ease;
+		&:hover {
+			color: #2f2f2f;
+		}
 	}
 `
 
-const CartTop = () => {
+
+
+const CartTop = ({setCartItems}) => {
+
+	const onClearCart = () => {
+		setCartItems([])
+	}
+
+
 	return (
 		<CartTopStyles>
 			<CartTitle>
@@ -55,17 +61,9 @@ const CartTop = () => {
 				></svg>
 				Корзина
 			</CartTitle>
-			{/* <CartClear>
-				<svg
-					width='20'
-					height='20'
-					viewBox='0 0 20 20'
-					fill='none'
-					xmlns='http://www.w3.org/2000/svg'
-				></svg>
-
+			<CartClear onClick={onClearCart}>
 				<span>Очистить корзину</span>
-			</CartClear> */}
+			</CartClear>
 		</CartTopStyles>
 	)
 }

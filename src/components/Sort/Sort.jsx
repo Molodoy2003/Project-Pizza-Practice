@@ -31,7 +31,7 @@ const SortPopup = styled.div`
 	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
 	border-radius: 10px;
 	overflow: hidden;
-	padding: 10px 0;
+	padding: 10px 0px;
 	width: 160px;
 
 	ul {
@@ -40,9 +40,8 @@ const SortPopup = styled.div`
 			padding: 12px 20px;
 			cursor: pointer;
 
-			&.active,
 			&:hover {
-				background: rgba(254, 95, 30, 0.05);
+				background-color: #f6dbdb;
 			}
 
 			&.active {
@@ -59,11 +58,9 @@ const sorts = [
 	{ name: 'алфавиту', property: 'title' },
 ]
 
-
 const Sort = () => {
 	const sortType = useSelector(state => state.filterSlice.sort)
 	const dispatch = useDispatch()
-
 	const [open, setOpen] = useState(false)
 
 	const onClickSort = obj => {

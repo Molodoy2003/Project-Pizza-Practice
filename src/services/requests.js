@@ -32,6 +32,7 @@ export const onAddToPizza = (obj, setCartItems) => {
 	try {
 		axios.post('https://647efc54c246f166da8fd2c1.mockapi.io/cart', obj)
 		setCartItems(prev => [...prev, obj])
+
 	} catch (error) {
 		console.log(Error)
 	}
@@ -45,3 +46,12 @@ export const onRemovePizza = (id, setCartItems) => {
 		console.log(error)
 	}
 }
+	
+// export const onClearCart = ( setCartItems ) => {
+// 	try {
+// 		axios.get(`https://647efc54c246f166da8fd2c1.mockapi.io/cart`)
+// 		setCartItems([])
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// }

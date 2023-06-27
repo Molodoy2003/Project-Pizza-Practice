@@ -1,10 +1,12 @@
-import axios from 'axios'
 import React from 'react'
-import { VscChromeClose } from 'react-icons/vsc'
 import styled from 'styled-components'
 import CartBottom from '../components/CartBottom/CartBottom'
 import CartTop from '../components/CartTop/CartTop'
 import { onRemovePizza } from '../services/requests.js'
+import { CloseCircle as CloseItem } from '@styled-icons/ionicons-outline/CloseCircle'
+// import { useDispatch, useSelector } from 'react-redux';
+// import CartItem from '../components/CartItem/CartItem'
+
 
 const CartStyles = styled.div`
 	max-width: 820px;
@@ -83,12 +85,22 @@ const CartPrice = styled.div`
 		letter-spacing: 0.01em;
 	}
 `
+const CloseIcon = styled(CloseItem)`
+	cursor: pointer;
+	opacity: 0.3;
+	transition: all .3s ease;
+	&:hover {
+		opacity: 1;	
+	}
+`
 
 const Cart = ({ cartItems, setCartItems }) => {
+	// const dispatch = useDispatch()
+	// const items = useSelector(state => state.cartSlice.items)
 
 	return (
 		<CartStyles>
-			<CartTop />
+			<CartTop setCartItems={setCartItems}/>
 			<CartItems>
 				{cartItems.map(item => (
 					<CartStl>
@@ -101,12 +113,16 @@ const Cart = ({ cartItems, setCartItems }) => {
 						<CartPrice>
 							<b>{item.price} р.</b>
 						</CartPrice>
-						<VscChromeClose
+						<CloseIcon size={28}
 							onClick={() => onRemovePizza(item.id, setCartItems)}
-							style={{ marginTop: '34px', cursor: 'pointer' }}
 						/>
 					</CartStl>
 				))}
+				{/* {
+					items.map(item => (
+						<CartItem key={item.id} {...item}/>
+					))
+				} */}
 			</CartItems>
 			<CartBottom cartItems={cartItems} />
 		</CartStyles>
