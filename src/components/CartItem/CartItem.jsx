@@ -1,8 +1,9 @@
-import React from 'react'
-import styled from 'styled-components'
 import { CloseCircle as CloseItem } from '@styled-icons/ionicons-outline/CloseCircle'
-// import { useSelector, useDispatch } from 'react-redux'
+import React from 'react'
+// import { useDispatch } from 'react-redux'
+import styled from 'styled-components'
 // import { removePizza } from '../../redux/slices/cartSlice'
+import { onRemovePizza } from '../../services/requests.js'
 
 const CartStl = styled.div`
 	display: flex;
@@ -73,14 +74,13 @@ const CartPrice = styled.div`
 const CloseIcon = styled(CloseItem)`
 	cursor: pointer;
 	opacity: 0.3;
-	transition: all .3s ease;
+	transition: all 0.3s ease;
 	&:hover {
-		opacity: 1;	
+		opacity: 1;
 	}
 `
 
-
-const CartItem = ({id, title, price, imageUrl}) => {
+const CartItem = ({ id, title, price, imageUrl }) => {
 	// const dispatch = useDispatch()
 
 	// const onClickRemovePizza = () => {
@@ -90,9 +90,7 @@ const CartItem = ({id, title, price, imageUrl}) => {
 	return (
 		<CartStl>
 			<CartImg>
-				<PizzaImage
-					src={imageUrl}
-				/>
+				<PizzaImage src={imageUrl} />
 			</CartImg>
 			<CartInfo>
 				<h3>{title}</h3>
@@ -100,7 +98,7 @@ const CartItem = ({id, title, price, imageUrl}) => {
 			<CartPrice>
 				<b>{price} р.</b>
 			</CartPrice>
-			<CloseIcon  size={28}/>
+			<CloseIcon onClick={onRemovePizza} size={28} />
 		</CartStl>
 	)
 }

@@ -10,7 +10,10 @@ const cartSlice = createSlice({
 	initialState,
 	reducers: {
 		removePizza(state, action) {
-			state.items.filter(obj => obj.id !== action.payload)
+			state.items = state.items.filter(obj => obj.id !== action.payload)
+			state.totalPrice = state.items.reduce((sum, item) => {
+				return sum + item.price
+			}, 0)
 		},
 		addPizza(state, action) {
 			state.items.push(action.payload)
@@ -20,6 +23,7 @@ const cartSlice = createSlice({
 		},
 		clearPizzas(state, action) {
 			state.items = []
+			state.totalPrice = 0
 		},
 	},
 })

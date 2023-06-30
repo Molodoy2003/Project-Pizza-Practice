@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { AppContext } from '../App'
+import { PizzaContext } from '../Context/Context'
 import Categories from '../components/Categories/Categories'
 import PizzaBlock from '../components/PizzaBlock/PizzaBlock'
 import Sort from '../components/Sort/Sort'
@@ -21,18 +22,23 @@ const ContentItems = styled.div`
 	justify-content: space-between;
 `
 
-const Home = ({ setCartItems }) => {
-	const categoryId = useSelector(state => state.filterSlice.categoryId)
-	const sortType = useSelector(state => state.filterSlice.sort)
-
+const Home = ({ cartItems, setCartItems }) => {
+	// const categoryId = useSelector(state => state.filterSlice.categoryId)
+	// const sortType = useSelector(state => state.filterSlice.sort)
 	const { searchValue } = useContext(AppContext)
 	const [items, setItems] = useState([])
+	const { state, dispatch } = useContext(PizzaContext)
 
 	useEffect(() => {
-		getItems(categoryId, sortType, searchValue, setItems)
-		getCartItems(setCartItems)
+		getItems(state.categoryId, state.sort, searchValue).then(res =>
+			setItems(res.data)
+		)
+
+		getCartItems(setCartItems).then(res => {
+			setCartItems(res.data)
+		})
 		window.scrollTo(0, 0)
-	}, [categoryId, sortType, searchValue])
+	}, [state.categoryId, state.sort, searchValue])
 
 	return (
 		<>

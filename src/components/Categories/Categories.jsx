@@ -1,13 +1,15 @@
 import React from 'react'
+// import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { setCategoryId } from '../../redux/slices/filterSlice.js'
-import { useDispatch, useSelector } from 'react-redux'
+// import { setCategoryId } from '../../redux/slices/filterSlice.js'
+import { useContext } from 'react'
+import { PizzaContext } from '../../Context/Context.jsx'
 
 const CategoriesUl = styled.ul`
 	display: flex;
 `
 const CategoriesLi = styled.li`
-	background-color: #f9f9f9;
+	background-color: #dbdada;
 	padding: 13px 30px;
 	border-radius: 30px;
 	margin-right: 10px;
@@ -30,11 +32,13 @@ const CategoriesLi = styled.li`
 `
 
 const Categories = () => {
-	const categoryId = useSelector(state => state.filterSlice.categoryId)
-	const dispatch = useDispatch()
+	const { state, dispatch } = useContext(PizzaContext);
 
-	const onChangeCategory = (id) => {
-		dispatch(setCategoryId(id))
+	const onChangeCategory = id => {
+		dispatch({
+			type: 'categories',
+			payload: id
+		})
 	}
 
 	const categories = [
@@ -43,7 +47,7 @@ const Categories = () => {
 		'Вегетарианская',
 		'Гриль',
 		'Острые',
-		'Закрытые'
+		'Закрытые',
 	]
 
 	return (
@@ -53,7 +57,7 @@ const Categories = () => {
 					<CategoriesLi
 						key={index}
 						onClick={() => onChangeCategory(index)}
-						className={categoryId === index ? 'active' : ''}
+						className={state.categoryId === index ? 'active' : ''}
 					>
 						{item}
 					</CategoriesLi>

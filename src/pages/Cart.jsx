@@ -1,12 +1,11 @@
+import { CloseCircle as CloseItem } from '@styled-icons/ionicons-outline/CloseCircle'
 import React from 'react'
 import styled from 'styled-components'
 import CartBottom from '../components/CartBottom/CartBottom'
 import CartTop from '../components/CartTop/CartTop'
 import { onRemovePizza } from '../services/requests.js'
-import { CloseCircle as CloseItem } from '@styled-icons/ionicons-outline/CloseCircle'
 // import { useDispatch, useSelector } from 'react-redux';
-// import CartItem from '../components/CartItem/CartItem'
-
+import CartItem from '../components/CartItem/CartItem'
 
 const CartStyles = styled.div`
 	max-width: 820px;
@@ -88,15 +87,16 @@ const CartPrice = styled.div`
 const CloseIcon = styled(CloseItem)`
 	cursor: pointer;
 	opacity: 0.3;
-	transition: all .3s ease;
+	transition: all 0.3s ease;
 	&:hover {
-		opacity: 1;	
+		opacity: 1;
 	}
 `
 
 const Cart = ({ cartItems, setCartItems }) => {
-	// const dispatch = useDispatch()
 	// const items = useSelector(state => state.cartSlice.items)
+
+
 
 	return (
 		<CartStyles>
@@ -113,16 +113,12 @@ const Cart = ({ cartItems, setCartItems }) => {
 						<CartPrice>
 							<b>{item.price} р.</b>
 						</CartPrice>
-						<CloseIcon size={28}
+						<CloseIcon
+							size={28}
 							onClick={() => onRemovePizza(item.id, setCartItems)}
 						/>
 					</CartStl>
 				))}
-				{/* {
-					items.map(item => (
-						<CartItem key={item.id} {...item}/>
-					))
-				} */}
 			</CartItems>
 			<CartBottom cartItems={cartItems} />
 		</CartStyles>
