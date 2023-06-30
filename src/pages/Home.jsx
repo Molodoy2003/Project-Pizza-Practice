@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from 'react'
 // import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { PizzaContext } from '../Context/Context'
-import Categories from '../components/Categories/Categories'
 import PizzaBlock from '../components/PizzaBlock/PizzaBlock'
+import Categories from '../components/Categories/Categories'
 import Sort from '../components/Sort/Sort'
 import { getCartItems, getItems, onAddToPizza } from '../services/requests'
 
@@ -23,6 +23,11 @@ const ContentItems = styled.div`
 
 const Home = ({ setCartItems }) => {
 	const { state, dispatch } = useContext(PizzaContext)
+
+	const addPizza = (item, setCartItems) => {
+		onAddToPizza(item, setCartItems)
+		setCartItems(prev => [...prev, item])
+	}
 
 	useEffect(() => {
 		getItems(state.categoryId, state.sort, state.searchValue).then(res =>
@@ -51,9 +56,10 @@ const Home = ({ setCartItems }) => {
 			<ContentItems>
 				{state.items.map(item => (
 					<PizzaBlock
+					setCartItems={setCartItems}
 						key={item.id}
 						{...item}
-						onPlus={() => onAddToPizza(item, setCartItems)}
+						onPlus={() => addPizza(item, setCartItems)}
 					/>
 				))}
 			</ContentItems>

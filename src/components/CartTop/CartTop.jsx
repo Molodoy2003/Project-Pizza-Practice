@@ -51,9 +51,6 @@ const CartTop = ({ setCartItems }) => {
   const onClearCart = () => {
     setCartItems([])
   }
-  // const onClearPizzas = () => {
-  // 	dispatch(clearPizzas())
-  // }
 
   return (
     <CartTopStyles>
