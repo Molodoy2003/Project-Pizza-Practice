@@ -9,6 +9,7 @@ const initialState = {
 	searchValue: '',
 	items: [],
 	cartItems: [],
+	totalPrice: 0,
 }
 
 export const reducer = (state, action) => {
@@ -37,6 +38,11 @@ export const reducer = (state, action) => {
 			return {
 				...state,
 				cartItems: [],
+			}
+		case 'totalPrice':
+			return {
+				...state,
+				totalPrice: action.payload,
 			}
 		default:
 			return state

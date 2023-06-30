@@ -22,7 +22,6 @@ const ContentItems = styled.div`
 `
 
 const Home = ({ setCartItems }) => {
-	// const [items, setItems] = useState([])
 	const { state, dispatch } = useContext(PizzaContext)
 
 	useEffect(() => {

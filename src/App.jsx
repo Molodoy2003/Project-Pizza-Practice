@@ -6,43 +6,43 @@ import Global from './global'
 import Routing from './routing/Routing'
 
 const Wrapper = styled.div`
-	width: calc(100vw - 100px);
-	height: 100%;
-	background-color: #fff;
-	margin: 50px auto;
-	border-radius: 10px;
-	max-width: 1400px;
+  width: calc(100vw - 100px);
+  height: 100%;
+  background-color: #fff;
+  margin: 50px auto;
+  border-radius: 10px;
+  max-width: 1400px;
 `
 const Content = styled.div`
-	padding: 40px 0;
+  padding: 40px 0;
 `
 const Container = styled.div`
-	width: 90%;
-	margin: 0 auto;
+  width: 90%;
+  margin: 0 auto;
 `
 
 export const AppContext = createContext()
 
 const App = () => {
-	const [cartItems, setCartItems] = useState([])
+  const [cartItems, setCartItems] = useState([])
 
-	return (
-		<BrowserRouter>
-			<Global />
-			<AppContext.Provider
-				value={{ cartItems, setCartItems }}
-			>
-			<Wrapper>
-				<Header />
-				<Content>
-					<Container>
-						<Routing  cartItems={cartItems} setCartItems={setCartItems}  />
-					</Container>
-				</Content>
-			</Wrapper>
-			</AppContext.Provider>
-		</BrowserRouter>
-	)
+  return (
+    <BrowserRouter>
+      <Global />
+      <AppContext.Provider
+        value={{ cartItems, setCartItems }}
+      >
+      <Wrapper>
+        <Header />
+        <Content>
+          <Container>
+            <Routing  cartItems={cartItems} setCartItems={setCartItems}  />
+          </Container>
+        </Content>
+      </Wrapper>
+      </AppContext.Provider>
+    </BrowserRouter>
+  )
 }
 
 export default App
