@@ -79,7 +79,6 @@ const ButtonDelimiter = styled.div`
 `
 
 const Header = ({ cartItems }) => {
-	// const { totalPrice, items } = useSelector(state => state.cartSlice)
 
 	return (
 		<HeaderStyles>

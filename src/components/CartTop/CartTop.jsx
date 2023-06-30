@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { onClearCart } from '../../services/requests.js'
+import { PizzaContext } from '../../Context/Context.jsx'
 // import { useDispatch, useSelector } from 'react-redux';
 // import { clearPizzas } from '../../redux/slices/cartSlice.js'
 
@@ -45,8 +46,7 @@ const CartClear = styled.div`
 
 
 const CartTop = ({ setCartItems }) => {
-	// const dispatch = useDispatch()
-	// const items = useSelector(state => state.cartSlice.items)
+	const {state, dispatch } = useContext(PizzaContext)
 
 	const onClearCart = () => {
 		setCartItems([])

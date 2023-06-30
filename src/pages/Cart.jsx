@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import CartBottom from '../components/CartBottom/CartBottom'
 import CartTop from '../components/CartTop/CartTop'
 import { onRemovePizza } from '../services/requests.js'
-// import { useDispatch, useSelector } from 'react-redux';
 import CartItem from '../components/CartItem/CartItem'
 
 const CartStyles = styled.div`
@@ -94,9 +93,6 @@ const CloseIcon = styled(CloseItem)`
 `
 
 const Cart = ({ cartItems, setCartItems }) => {
-	// const items = useSelector(state => state.cartSlice.items)
-
-
 
 	return (
 		<CartStyles>

@@ -2,7 +2,7 @@ import { Search as LogoSearch } from '@styled-icons/bootstrap/Search'
 import { Close as LogoClose } from '@styled-icons/evil/Close'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { AppContext } from '../../App'
+import { PizzaContext } from '../../Context/Context'
 
 const SearchInput = styled.input`
 	padding: 10px 40px;
@@ -34,20 +34,31 @@ const CloseImage = styled(LogoClose)`
 `
 
 const Search = () => {
-	const { searchValue, setSearchValue } = useContext(AppContext)
+	const { state, dispatch } = useContext(PizzaContext)
 
 	return (
 		<>
 			<SearchImage size={15} />
 			<SearchInput
-				value={searchValue}
+				value={state.searchValue}
 				type='text'
 				placeholder='Поиск пиццы...'
-				onChange={e => setSearchValue(e.target.value)}
+				onChange={e =>
+					dispatch({
+						type: 'searchValue',
+						payload: e.target.value,
+					})
+				}
 			/>
-			{searchValue && (
-				<CloseImage size={18}
-					onClick={() => setSearchValue('')}
+			{state.searchValue && (
+				<CloseImage
+					size={18}
+					onClick={() =>
+						dispatch({
+							type: 'searchValue',
+							payload: '',
+						})
+					}
 				/>
 			)}
 		</>

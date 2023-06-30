@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
-// import { useSelector } from 'react-redux'
-
 
 const CartBottomStyles = styled.div`
 	margin: 50px 0;
@@ -57,8 +55,6 @@ const CartBtnBack = styled(CartButtonPay)`
 `
 
 const CartBottom = ({cartItems}) => {
-	// const {items, totalPrice} = useSelector(state => state.cartSlice)
-
 	return (
 		<CartBottomStyles>
 			<CartDetails>

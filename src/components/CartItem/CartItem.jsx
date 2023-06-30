@@ -1,8 +1,6 @@
 import { CloseCircle as CloseItem } from '@styled-icons/ionicons-outline/CloseCircle'
 import React from 'react'
-// import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-// import { removePizza } from '../../redux/slices/cartSlice'
 import { onRemovePizza } from '../../services/requests.js'
 
 const CartStl = styled.div`
@@ -81,12 +79,6 @@ const CloseIcon = styled(CloseItem)`
 `
 
 const CartItem = ({ id, title, price, imageUrl }) => {
-	// const dispatch = useDispatch()
-
-	// const onClickRemovePizza = () => {
-	// 	dispatch(removePizza(id))
-	// }
-
 	return (
 		<CartStl>
 			<CartImg>

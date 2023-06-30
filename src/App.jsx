@@ -24,23 +24,22 @@ const Container = styled.div`
 export const AppContext = createContext()
 
 const App = () => {
-	const [searchValue, setSearchValue] = useState('')
 	const [cartItems, setCartItems] = useState([])
 
 	return (
 		<BrowserRouter>
 			<Global />
 			<AppContext.Provider
-				value={{ searchValue, setSearchValue, cartItems, setCartItems }}
+				value={{ cartItems, setCartItems }}
 			>
-				<Wrapper>
-					<Header />
-					<Content>
-						<Container>
-							<Routing cartItems={cartItems} setCartItems={setCartItems} />
-						</Container>
-					</Content>
-				</Wrapper>
+			<Wrapper>
+				<Header />
+				<Content>
+					<Container>
+						<Routing  cartItems={cartItems} setCartItems={setCartItems}  />
+					</Container>
+				</Content>
+			</Wrapper>
 			</AppContext.Provider>
 		</BrowserRouter>
 	)

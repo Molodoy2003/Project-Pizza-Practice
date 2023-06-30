@@ -6,6 +6,9 @@ const initialState = {
 		name: 'популярности',
 		property: 'rating',
 	},
+	searchValue: '',
+	items: [],
+	cartItems: [],
 }
 
 export const reducer = (state, action) => {
@@ -19,6 +22,21 @@ export const reducer = (state, action) => {
 			return {
 				...state,
 				sort: action.payload,
+			}
+		case 'searchValue':
+			return {
+				...state,
+				searchValue: action.payload,
+			}
+		case 'items':
+			return {
+				...state,
+				items: action.payload,
+			}
+		case 'cartItems':
+			return {
+				...state,
+				cartItems: [],
 			}
 		default:
 			return state
