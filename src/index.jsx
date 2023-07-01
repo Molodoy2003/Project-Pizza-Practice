@@ -6,5 +6,6 @@ import { PizzaContextProvider } from './Context/Context.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<PizzaContextProvider>
 		<App />
+		{/* <Tabs/> */}
 	</PizzaContextProvider>
 )

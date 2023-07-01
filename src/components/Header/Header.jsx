@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { BsCart3 } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Search from '../Search/Search'
-// import { useSelector } from 'react-redux'
+import { PizzaContext } from '../../Context/Context'
 
 const HeaderStyles = styled.div`
   border-bottom: 1px solid #f6f6f6;
@@ -78,12 +78,13 @@ const ButtonDelimiter = styled.div`
   margin-right: 14px;
 `
 
-const Header = ({ cartItems }) => {
+const Header = () => {
+  const {state, dispatch} = useContext(PizzaContext)
 
   return (
     <HeaderStyles>
       <HeaderContainer>
-        <Link to='/'>
+        <Link to='/home'>
           <HeaderLogo>
             <img width='38' src='./img/pizza-logo.svg' alt='Pizza logo' />
             <div>
@@ -95,10 +96,10 @@ const Header = ({ cartItems }) => {
         <Search />
         <div>
           <HeaderButton to='/cart'>
-            <span>0 р.</span>
+            <span>{state.totalPrice} р.</span>
             <ButtonDelimiter></ButtonDelimiter>
             <BsCart3 />
-            <span>0</span>
+            <span>{state.cartItems.length}</span>
           </HeaderButton>
         </div>
       </HeaderContainer>

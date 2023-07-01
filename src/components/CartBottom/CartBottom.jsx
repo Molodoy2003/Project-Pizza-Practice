@@ -55,7 +55,7 @@ const CartBtnBack = styled(CartButtonPay)`
   width: 170px;
 `
 
-const CartBottom = ({cartItems}) => {
+const CartBottom = () => {
   const {state, dispatch} = useContext(PizzaContext)
 
   return (
@@ -63,7 +63,7 @@ const CartBottom = ({cartItems}) => {
       <CartDetails>
         <span>
           {' '}
-          Всего пицц: <b>{cartItems.length} шт.</b>{' '}
+          Всего пицц: <b>{state.cartItems.length} шт.</b>{' '}
         </span>
         <span>
           {' '}
@@ -71,7 +71,7 @@ const CartBottom = ({cartItems}) => {
         </span>
       </CartDetails>
       <CartBottomButtons>
-        <CartBtnBack to='/'>
+        <CartBtnBack to='/home'>
           <span>Вернуться назад</span>
         </CartBtnBack>
         <CartButtonPay>

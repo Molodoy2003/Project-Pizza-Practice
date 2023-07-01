@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
+import { PizzaContext } from '../../Context/Context'
+
 
 const PizzaBlockStyles = styled.div`
 	width: 280px;

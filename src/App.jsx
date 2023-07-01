@@ -33,7 +33,7 @@ const App = () => {
         value={{ cartItems, setCartItems }}
       >
       <Wrapper>
-        <Header />
+        {/* <Header /> */}
         <Content>
           <Container>
             <Routing  cartItems={cartItems} setCartItems={setCartItems}  />

@@ -37,7 +37,7 @@ export const reducer = (state, action) => {
 		case 'cartItems':
 			return {
 				...state,
-				cartItems: [],
+				cartItems: action.payload
 			}
 		case 'totalPrice':
 			return {

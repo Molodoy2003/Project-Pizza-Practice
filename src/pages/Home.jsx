@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react'
-// import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { PizzaContext } from '../Context/Context'
 import PizzaBlock from '../components/PizzaBlock/PizzaBlock'
 import Categories from '../components/Categories/Categories'
 import Sort from '../components/Sort/Sort'
 import { getCartItems, getItems, onAddToPizza } from '../services/requests'
+import Header from '../components/Header/Header'
 
 const ContentTop = styled.div`
 	display: flex;
@@ -48,6 +48,7 @@ const Home = ({ setCartItems }) => {
 
 	return (
 		<>
+		  <Header/>
 			<ContentTop>
 				<Categories />
 				<Sort />
