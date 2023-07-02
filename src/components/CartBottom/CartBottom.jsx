@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
+// import { useSelector } from 'react-redux'
 
 
 const CartBottomStyles = styled.div`
@@ -56,6 +57,8 @@ const CartBtnBack = styled(CartButtonPay)`
 `
 
 const CartBottom = ({cartItems}) => {
+	// const {items, totalPrice} = useSelector(state => state.cartSlice)
+
 	return (
 		<CartBottomStyles>
 			<CartDetails>
@@ -65,7 +68,7 @@ const CartBottom = ({cartItems}) => {
 				</span>
 				<span>
 					{' '}
-					Сумма заказа: <b>900 р.</b>{' '}
+					Сумма заказа: <b>0 р.</b>{' '}
 				</span>
 			</CartDetails>
 			<CartBottomButtons>

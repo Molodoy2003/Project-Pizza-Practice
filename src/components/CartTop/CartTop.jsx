@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { onClearCart } from '../../services/requests'
+import { onClearCart } from '../../services/requests.js'
+// import { useDispatch, useSelector } from 'react-redux';
+// import { clearPizzas } from '../../redux/slices/cartSlice.js'
 
 const CartTopStyles = styled.div`
 	display: flex;
@@ -42,12 +44,16 @@ const CartClear = styled.div`
 
 
 
-const CartTop = ({setCartItems}) => {
+const CartTop = ({ setCartItems }) => {
+	// const dispatch = useDispatch()
+	// const items = useSelector(state => state.cartSlice.items)
 
 	const onClearCart = () => {
 		setCartItems([])
 	}
-
+	// const onClearPizzas = () => {
+	// 	dispatch(clearPizzas())
+	// }
 
 	return (
 		<CartTopStyles>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { addPizza } from '../../redux/slices/cartSlice.js'
+import { useDispatch, useSelector } from 'react-redux'
+import { addPizza } from '../../redux/slices/cartSlice.js'
 
 
 const PizzaBlockStyles = styled.div`
@@ -156,6 +156,18 @@ const PizzaBlock = ({ id, title, price, imageUrl, sizes, types, onPlus}) => {
 		onPlus()
 		setCount(count + 1)
 	}
+
+	// const onClickAddPizza = () => {
+	// 	onPlus()
+	// 	setCount(count + 1)
+	// 	const item = {
+	// 		id,
+	// 		title, 
+	// 		imageUrl, 
+	// 		price
+	// 	}
+	// 	dispatch(addPizza(item))
+	// }
 
 	return (
 		<PizzaBlockStyles>

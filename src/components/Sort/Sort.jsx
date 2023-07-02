@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useContext, useState } from 'react'
+// import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { setSortType } from '../../redux/slices/filterSlice'
+import { PizzaContext } from '../../Context/Context'
+// import { setSortType } from '../../redux/slices/filterSlice'
 
 const SortStyles = styled.div`
 	position: relative;
@@ -59,13 +60,15 @@ const sorts = [
 ]
 
 const Sort = () => {
-	const sortType = useSelector(state => state.filterSlice.sort)
-	const dispatch = useDispatch()
 	const [open, setOpen] = useState(false)
+	const {state, dispatch} = useContext(PizzaContext)
 
-	const onClickSort = obj => {
-		dispatch(setSortType(obj))
+	const onClickSort = id => {
 		setOpen(false)
+		dispatch({
+			type: 'sort',
+			payload: id
+		})
 	}
 
 	return (
@@ -79,7 +82,7 @@ const Sort = () => {
 					xmlns='http://www.w3.org/2000/svg'
 				></svg>
 				<b>Сортировка по:</b>
-				<span onClick={() => setOpen(!open)}>{sortType.name}</span>
+				<span onClick={() => setOpen(!open)}>{state.sort.name}</span>
 			</SortLabel>
 			{open && (
 				<SortPopup>
@@ -88,7 +91,7 @@ const Sort = () => {
 							<li
 								key={index}
 								onClick={() => onClickSort(obj)}
-								className={sortType.property === obj.property ? 'active' : ''}
+								className={state.sort.property === obj.property ? 'active' : ''}
 							>
 								{obj.name}
 							</li>

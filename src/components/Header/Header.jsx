@@ -99,7 +99,7 @@ const Header = ({ cartItems }) => {
 						<span>0 р.</span>
 						<ButtonDelimiter></ButtonDelimiter>
 						<BsCart3 />
-						<span>{cartItems.length}</span>
+						<span>0</span>
 					</HeaderButton>
 				</div>
 			</HeaderContainer>
