@@ -1,266 +1,130 @@
+import { CloseCircle as CloseItem } from '@styled-icons/ionicons-outline/CloseCircle'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import CartBottom from '../components/CartBottom/CartBottom'
+import CartTop from '../components/CartTop/CartTop'
+import Header from '../components/Header/Header'
+import { onRemovePizza } from '../services/requests.js'
 
-const Cart = () => {
+const CartStyles = styled.div`
+	max-width: 820px;
+	margin: 90px auto;
+`
+
+const CartItems = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+`
+
+const CartStl = styled.div`
+	display: flex;
+	width: 100%;
+	border-top: 1px solid #f6f6f6;
+	padding-top: 30px;
+	margin-top: 30px;
+`
+const CartImg = styled.div`
+	display: flex;
+	align-items: center;
+	margin-right: 15px;
+	width: 10%;
+	img {
+		width: 85px;
+		height: 85px;
+	}
+`
+const PizzaImage = styled.img`
+	width: 100px;
+`
+const CartInfo = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 40%;
+
+	h3 {
+		font-weight: 800;
+		font-size: 22px;
+		line-height: 27px;
+		letter-spacing: 0.01em;
+	}
+
+	p {
+		font-size: 18px;
+		color: #8d8d8d;
+	}
+`
+const CartCount = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 13%;
+	&-minus {
+		svg {
+			path:first-of-type {
+				display: none;
+			}
+		}
+	}
+	b {
+		font-weight: 800;
+		font-size: 22px;
+	}
+`
+const CartPrice = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 33%;
+	b {
+		font-weight: 800;
+		font-size: 22px;
+		letter-spacing: 0.01em;
+	}
+`
+const CloseIcon = styled(CloseItem)`
+	cursor: pointer;
+	opacity: 0.3;
+	transition: all 0.3s ease;
+	&:hover {
+		opacity: 1;
+	}
+`
+
+const Cart = ({ cartItems, setCartItems }) => {
+	const removePizza = (id, setCartItems) => {
+		onRemovePizza(id, setCartItems)
+		setCartItems(prev => prev.filter(item => item.id !== id))
+	}
+
 	return (
-		<div class='cart'>
-			<div class='cart__top'>
-				<h2 class='content__title'>
-					<svg
-						width='18'
-						height='18'
-						viewBox='0 0 18 18'
-						fill='none'
-						xmlns='http://www.w3.org/2000/svg'
-					></svg>
-					Корзина
-				</h2>
-				<div class='cart__clear'>
-					<svg
-						width='20'
-						height='20'
-						viewBox='0 0 20 20'
-						fill='none'
-						xmlns='http://www.w3.org/2000/svg'
-					></svg>
-
-					<span>Очистить корзину</span>
-				</div>
-			</div>
-			<div class='content__items'>
-				<div class='cart__item'>
-					<div class='cart__item-img'>
-						<img
-							class='pizza-block__image'
-							src='https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg'
-							alt='Pizza'
-						/>
-					</div>
-					<div class='cart__item-info'>
-						<h3>Сырный цыпленок</h3>
-						<p>тонкое тесто, 26 см.</p>
-					</div>
-					<div class='cart__item-count'>
-						<div class='button button--outline button--circle cart__item-count-minus'>
-							<svg
-								width='10'
-								height='10'
-								viewBox='0 0 10 10'
-								fill='none'
-								xmlns='http://www.w3.org/2000/svg'
-							></svg>
-						</div>
-						<b>2</b>
-						<div class='button button--outline button--circle cart__item-count-plus'>
-							<svg
-								width='10'
-								height='10'
-								viewBox='0 0 10 10'
-								fill='none'
-								xmlns='http://www.w3.org/2000/svg'
-							></svg>
-						</div>
-					</div>
-					<div class='cart__item-price'>
-						<b>770 р.</b>
-					</div>
-					<div class='cart__item-remove'>
-						<div class='button button--outline button--circle'>
-							<svg
-								width='10'
-								height='10'
-								viewBox='0 0 10 10'
-								fill='none'
-								xmlns='http://www.w3.org/2000/svg'
-							></svg>
-						</div>
-					</div>
-				</div>
-				<div class='cart__item'>
-					<div class='cart__item-img'>
-						<img
-							class='pizza-block__image'
-							src='https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg'
-							alt='Pizza'
-						/>
-					</div>
-					<div class='cart__item-info'>
-						<h3>Сырный цыпленок</h3>
-						<p>тонкое тесто, 26 см.</p>
-					</div>
-					<div class='cart__item-count'>
-						<div class='button button--outline button--circle cart__item-count-minus'>
-							<svg
-								width='10'
-								height='10'
-								viewBox='0 0 10 10'
-								fill='none'
-								xmlns='http://www.w3.org/2000/svg'
-							></svg>
-						</div>
-						<b>2</b>
-						<div class='button button--outline button--circle cart__item-count-plus'>
-							<svg
-								width='10'
-								height='10'
-								viewBox='0 0 10 10'
-								fill='none'
-								xmlns='http://www.w3.org/2000/svg'
-							></svg>
-						</div>
-					</div>
-					<div class='cart__item-price'>
-						<b>770 р.</b>
-					</div>
-					<div class='cart__item-remove'>
-						<div class='button button--outline button--circle'>
-							<svg
-								width='10'
-								height='10'
-								viewBox='0 0 10 10'
-								fill='none'
-								xmlns='http://www.w3.org/2000/svg'
-							></svg>
-						</div>
-					</div>
-				</div>
-				<div class='cart__item'>
-					<div class='cart__item-img'>
-						<img
-							class='pizza-block__image'
-							src='https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg'
-							alt='Pizza'
-						/>
-					</div>
-					<div class='cart__item-info'>
-						<h3>Сырный цыпленок</h3>
-						<p>тонкое тесто, 26 см.</p>
-					</div>
-					<div class='cart__item-count'>
-						<div class='button button--outline button--circle cart__item-count-minus'>
-							<svg
-								width='10'
-								height='10'
-								viewBox='0 0 10 10'
-								fill='none'
-								xmlns='http://www.w3.org/2000/svg'
-							></svg>
-						</div>
-						<b>2</b>
-						<div class='button button--outline button--circle cart__item-count-plus'>
-							<svg
-								width='10'
-								height='10'
-								viewBox='0 0 10 10'
-								fill='none'
-								xmlns='http://www.w3.org/2000/svg'
-							></svg>
-						</div>
-					</div>
-					<div class='cart__item-price'>
-						<b>770 р.</b>
-					</div>
-					<div class='cart__item-remove'>
-						<div class='button button--outline button--circle'>
-							<svg
-								width='10'
-								height='10'
-								viewBox='0 0 10 10'
-								fill='none'
-								xmlns='http://www.w3.org/2000/svg'
-							></svg>
-						</div>
-					</div>
-				</div>
-				<div class='cart__item'>
-					<div class='cart__item-img'>
-						<img
-							class='pizza-block__image'
-							src='https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg'
-							alt='Pizza'
-						/>
-					</div>
-					<div class='cart__item-info'>
-						<h3>Сырный цыпленок</h3>
-						<p>тонкое тесто, 26 см.</p>
-					</div>
-					<div class='cart__item-count'>
-						<div class='button button--outline button--circle cart__item-count-minus'>
-							<svg
-								width='10'
-								height='10'
-								viewBox='0 0 10 10'
-								fill='none'
-								xmlns='http://www.w3.org/2000/svg'
-							></svg>
-						</div>
-						<b>2</b>
-						<div class='button button--outline button--circle cart__item-count-plus'>
-							<svg
-								width='10'
-								height='10'
-								viewBox='0 0 10 10'
-								fill='none'
-								xmlns='http://www.w3.org/2000/svg'
-							></svg>
-						</div>
-					</div>
-					<div class='cart__item-price'>
-						<b>770 р.</b>
-					</div>
-					<div class='cart__item-remove'>
-						<div class='button button--outline button--circle'>
-							<svg
-								width='10'
-								height='10'
-								viewBox='0 0 10 10'
-								fill='none'
-								xmlns='http://www.w3.org/2000/svg'
-							></svg>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class='cart__bottom'>
-				<div class='cart__bottom-details'>
-					<span>
-						{' '}
-						Всего пицц: <b>4 шт.</b>{' '}
-					</span>
-					<span>
-						{' '}
-						Сумма заказа: <b>900 р.</b>{' '}
-					</span>
-				</div>
-				<div class='cart__bottom-buttons'>
-					<Link
-						to='/'
-						class='button button--outline button--add go-back-btn'
-					>
-						<svg
-							width='8'
-							height='14'
-							viewBox='0 0 8 14'
-							fill='none'
-							xmlns='http://www.w3.org/2000/svg'
-						>
-							<path
-								d='M7 13L1 6.93015L6.86175 1'
-								stroke='#D3D3D3'
-								stroke-width='1.5'
-								stroke-linecap='round'
-								stroke-linejoin='round'
-							></path>
-						</svg>
-
-						<span>Вернуться назад</span>
-					</Link>
-					<div class='button pay-btn'>
-						<span>Оплатить сейчас</span>
-					</div>
-				</div>
-			</div>
-		</div>
+		<>
+			<Header />
+			<CartStyles>
+				<CartTop setCartItems={setCartItems} />
+				<CartItems>
+					{cartItems.map(item => (
+						<CartStl>
+							<CartImg>
+								<PizzaImage src={item.imageUrl} alt='Pizza' />
+							</CartImg>
+							<CartInfo>
+								<h3>{item.title}</h3>
+							</CartInfo>
+							<CartPrice>
+								<b>{item.price} р.</b>
+							</CartPrice>
+							<CloseIcon
+								size={28}
+								onClick={() => removePizza(item.id, setCartItems)}
+							/>
+						</CartStl>
+					))}
+				</CartItems>
+				<CartBottom cartItems={cartItems} />
+			</CartStyles>
+		</>
 	)
 }
 

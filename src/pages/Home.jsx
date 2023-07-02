@@ -1,9 +1,11 @@
-import { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components'
-import { AppContext } from '../App'
-import Categories from '../components/Categories/Categories'
+import { PizzaContext } from '../Context/Context'
 import PizzaBlock from '../components/PizzaBlock/PizzaBlock'
+import Categories from '../components/Categories/Categories'
 import Sort from '../components/Sort/Sort'
+import { getCartItems, getItems, onAddToPizza } from '../services/requests'
+import Header from '../components/Header/Header'
 
 const ContentTop = styled.div`
 	display: flex;
@@ -19,52 +21,46 @@ const ContentItems = styled.div`
 	justify-content: space-between;
 `
 
-const Home = () => {
-	const { searchValue } = useContext(AppContext)
-	const [items, setItems] = useState([])
-	const [sortType, setSortType] = useState({
-		name: 'популярности',
-		property: 'rating'
-	})
-	const [categotyId, setCategotyId] = useState(0)
+const Home = ({ setCartItems }) => {
+	const { state, dispatch } = useContext(PizzaContext)
+
+	const addPizza = (item, setCartItems) => {
+		onAddToPizza(item, setCartItems)
+		setCartItems(prev => [...prev, item])
+	}
 
 	useEffect(() => {
-		fetch(
-			`https://647efc54c246f166da8fd2c1.mockapi.io/items?${
-				categotyId > 0 ? `category=${categotyId}` : ''
-			}&sortBy=${sortType.property}&order=desc${
-				searchValue ? `&search=${searchValue}` : ''
-			}`
+		getItems(state.categoryId, state.sort, state.searchValue).then(res =>
+			dispatch({
+				type: 'items',
+				payload: res.data,
+			})
 		)
-			.then(res => {
-				return res.json()
+
+		getCartItems().then(res => {
+			dispatch({
+				type: 'cartItems',
+				payload: res.data,
 			})
-			.then(arr => {
-				console.log(arr)
-				setItems(arr)
-			})
+		})
 		window.scrollTo(0, 0)
-	}, [categotyId, sortType, searchValue])
+	}, [state.categoryId, state.sort, state.searchValue])
 
 	return (
 		<>
+		  <Header/>
 			<ContentTop>
-				<Categories
-					categotyId={categotyId}
-					onChangeCategory={id => setCategotyId(id)}
-				/>
-				<Sort sortType={sortType} onChangeSort={id => setSortType(id)} />
+				<Categories />
+				<Sort />
 			</ContentTop>
 			<ContentTitle>Все пиццы</ContentTitle>
 			<ContentItems>
-				{items.map(item => (
+				{state.items.map(item => (
 					<PizzaBlock
+					setCartItems={setCartItems}
 						key={item.id}
-						title={item.title}
-						price={item.price}
-						image={item.imageUrl}
-						sizes={item.sizes}
-						types={item.types}
+						{...item}
+						onPlus={() => addPizza(item, setCartItems)}
 					/>
 				))}
 			</ContentItems>

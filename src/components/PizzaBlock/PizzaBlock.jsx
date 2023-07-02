@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
+import { PizzaContext } from '../../Context/Context'
+
 
 const PizzaBlockStyles = styled.div`
 	width: 280px;
@@ -142,14 +144,20 @@ const PizzaButton = styled(PizzaButton1)`
 	}
 `
 
-const PizzaBlock = ({ title, price, image, sizes, types }) => {
+const PizzaBlock = ({ id, title, price, imageUrl, sizes, types, onPlus }) => {
 	const [activeType, setActiveType] = useState(0)
 	const [activeSize, setActiveSize] = useState(0)
+	const [count, setCount] = useState(0)
 	const typeNames = ['тонкое', 'сырный борт']
+
+	const onClickPlus = () => {
+		onPlus()
+		setCount(count + 1)
+	}
 
 	return (
 		<PizzaBlockStyles>
-			<PizzaImage src={image} alt='Pizza' />
+			<PizzaImage src={imageUrl} alt='Pizza' />
 			<PizzaTitle>{title}</PizzaTitle>
 			<PizzaSelector>
 				<ul>
@@ -177,7 +185,7 @@ const PizzaBlock = ({ title, price, image, sizes, types }) => {
 			</PizzaSelector>
 			<PizzaBottom>
 				<PizzaPrice>от {price} р.</PizzaPrice>
-				<PizzaButton>
+				<PizzaButton onClick={onClickPlus}>
 					<svg
 						width='12'
 						height='12'
@@ -186,7 +194,7 @@ const PizzaBlock = ({ title, price, image, sizes, types }) => {
 						xmlns='http://www.w3.org/2000/svg'
 					></svg>
 					<span>Добавить</span>
-					<i>0</i>
+					<i>{count}</i>
 				</PizzaButton>
 			</PizzaBottom>
 		</PizzaBlockStyles>
