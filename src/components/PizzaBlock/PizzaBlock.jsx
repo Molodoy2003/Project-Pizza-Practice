@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
-import { useDispatch, useSelector } from 'react-redux'
-import { addPizza } from '../../redux/slices/cartSlice.js'
+import { PizzaContext } from '../../Context/Context'
 
 
 const PizzaBlockStyles = styled.div`
@@ -145,29 +144,16 @@ const PizzaButton = styled(PizzaButton1)`
 	}
 `
 
-const PizzaBlock = ({ id, title, price, imageUrl, sizes, types, onPlus}) => {
+const PizzaBlock = ({ id, title, price, imageUrl, sizes, types, onPlus }) => {
 	const [activeType, setActiveType] = useState(0)
 	const [activeSize, setActiveSize] = useState(0)
 	const [count, setCount] = useState(0)
 	const typeNames = ['тонкое', 'сырный борт']
-	// const dispatch = useDispatch()
 
 	const onClickPlus = () => {
 		onPlus()
 		setCount(count + 1)
 	}
-
-	// const onClickAddPizza = () => {
-	// 	onPlus()
-	// 	setCount(count + 1)
-	// 	const item = {
-	// 		id,
-	// 		title, 
-	// 		imageUrl, 
-	// 		price
-	// 	}
-	// 	dispatch(addPizza(item))
-	// }
 
 	return (
 		<PizzaBlockStyles>
