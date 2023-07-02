@@ -3,9 +3,8 @@ import React from 'react'
 import styled from 'styled-components'
 import CartBottom from '../components/CartBottom/CartBottom'
 import CartTop from '../components/CartTop/CartTop'
+import Header from '../components/Header/Header'
 import { onRemovePizza } from '../services/requests.js'
-// import { useDispatch, useSelector } from 'react-redux';
-import CartItem from '../components/CartItem/CartItem'
 
 const CartStyles = styled.div`
 	max-width: 820px;
@@ -94,34 +93,38 @@ const CloseIcon = styled(CloseItem)`
 `
 
 const Cart = ({ cartItems, setCartItems }) => {
-	// const items = useSelector(state => state.cartSlice.items)
-
-
+	const removePizza = (id, setCartItems) => {
+		onRemovePizza(id, setCartItems)
+		setCartItems(prev => prev.filter(item => item.id !== id))
+	}
 
 	return (
-		<CartStyles>
-			<CartTop setCartItems={setCartItems}/>
-			<CartItems>
-				{cartItems.map(item => (
-					<CartStl>
-						<CartImg>
-							<PizzaImage src={item.imageUrl} alt='Pizza' />
-						</CartImg>
-						<CartInfo>
-							<h3>{item.title}</h3>
-						</CartInfo>
-						<CartPrice>
-							<b>{item.price} р.</b>
-						</CartPrice>
-						<CloseIcon
-							size={28}
-							onClick={() => onRemovePizza(item.id, setCartItems)}
-						/>
-					</CartStl>
-				))}
-			</CartItems>
-			<CartBottom cartItems={cartItems} />
-		</CartStyles>
+		<>
+			<Header />
+			<CartStyles>
+				<CartTop setCartItems={setCartItems} />
+				<CartItems>
+					{cartItems.map(item => (
+						<CartStl>
+							<CartImg>
+								<PizzaImage src={item.imageUrl} alt='Pizza' />
+							</CartImg>
+							<CartInfo>
+								<h3>{item.title}</h3>
+							</CartInfo>
+							<CartPrice>
+								<b>{item.price} р.</b>
+							</CartPrice>
+							<CloseIcon
+								size={28}
+								onClick={() => removePizza(item.id, setCartItems)}
+							/>
+						</CartStl>
+					))}
+				</CartItems>
+				<CartBottom cartItems={cartItems} />
+			</CartStyles>
+		</>
 	)
 }
 
