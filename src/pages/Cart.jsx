@@ -98,6 +98,10 @@ const Cart = ({ cartItems, setCartItems }) => {
 		setCartItems(prev => prev.filter(item => item.id !== id))
 	}
 
+	const test = () => {
+		console.log("asd");
+	}
+
 	return (
 		<>
 			<Header />
