@@ -2,6 +2,19 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './menu.scss'
 
+
+
+const list = [
+	'Маргарита',
+	'Пепперони',
+	'Чизбургер-пицца',
+	'Сырная',
+	'		Пепперони Фреш',
+	'	Цыпленок барбекю',
+	'	Сладкий цыпленок',
+	'		Крэйзи пепперони',
+]
+
 const Menu = () => {
 	const [activeTab, setActiveTab] = useState(0)
 
@@ -46,60 +59,21 @@ const Menu = () => {
 			<div className='line' />
 			<div className='menu__list'>
 				<ul>
-					<li
-						className={activeTab === 0 ? 'active' : ''}
-						onClick={() => onClickTab(0)}
-					>
-						Маргарита
-					</li>
-					<li
-						className={activeTab === 1 ? 'active' : ''}
-						onClick={() => onClickTab(1)}
-					>
-						Пепперони
-					</li>
-					<li
-						className={activeTab === 2 ? 'active' : ''}
-						onClick={() => onClickTab(2)}
-					>
-						Чизбургер-пицца
-					</li>
-					<li
-						className={activeTab === 3 ? 'active' : ''}
-						onClick={() => onClickTab(3)}
-					>
-						Сырная
-					</li>
-					<li
-						className={activeTab === 4 ? 'active' : ''}
-						onClick={() => onClickTab(4)}
-					>
-						Пепперони Фреш
-					</li>
-					<li
-						className={activeTab === 5 ? 'active' : ''}
-						onClick={() => onClickTab(5)}
-					>
-						Цыпленок барбекю
-					</li>
-					<li
-						className={activeTab === 6 ? 'active' : ''}
-						onClick={() => onClickTab(6)}
-					>
-						Сладкий цыпленок
-					</li>
-					<li
-						className={activeTab === 7 ? 'active' : ''}
-						onClick={() => onClickTab(7)}
-					>
-						Крэйзи пепперони
-					</li>
+					{list.map((item, id) => (
+						<li
+							className={activeTab === id ? 'active' : ''}
+							onClick={() => onClickTab(id)}
+						>
+							{item}
+						</li>
+					))}
 				</ul>
-				<Link to='/home'>
+				<Link to='/catalog'>
 					<button>order online</button>
 				</Link>
 			</div>
 		</div>
+		
 	)
 }
 

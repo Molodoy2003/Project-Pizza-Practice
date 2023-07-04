@@ -84,7 +84,7 @@ const Header = () => {
   return (
     <HeaderStyles>
       <HeaderContainer>
-        <Link to='/home'>
+        <Link to='/catalog'>
           <HeaderLogo>
             <img width='38' src='./img/pizza-logo.svg' alt='Pizza logo' />
             <div>

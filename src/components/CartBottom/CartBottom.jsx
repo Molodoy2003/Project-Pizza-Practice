@@ -71,7 +71,7 @@ const CartBottom = () => {
         </span>
       </CartDetails>
       <CartBottomButtons>
-        <CartBtnBack to='/home'>
+        <CartBtnBack to='/catalog'>
           <span>Вернуться назад</span>
         </CartBtnBack>
         <CartButtonPay>

@@ -8,22 +8,14 @@ import Menu from '../pages/Menu'
 const Routing = ({ cartItems, setCartItems }) => {
 	return (
 		<Routes>
+			<Route path='/' element={<Menu />} />
 			<Route
-				path='/home'
-				element={
-					<Home
-						cartItems={cartItems}
-						setCartItems={setCartItems}
-					/>
-				}
+				path='/catalog'
+				element={<Home cartItems={cartItems} setCartItems={setCartItems} />}
 			/>
 			<Route
 				path='/cart'
 				element={<Cart cartItems={cartItems} setCartItems={setCartItems} />}
-			/>
-			<Route
-				path='/'
-				element={<Menu />}
 			/>
 			<Route path='*' element={<Error />} />
 		</Routes>

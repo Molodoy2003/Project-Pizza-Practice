@@ -96,7 +96,7 @@ const Cart = ({ cartItems, setCartItems }) => {
 	const removePizza = (id, setCartItems) => {
 		onRemovePizza(id, setCartItems)
 		setCartItems(prev => prev.filter(item => item.id !== id))
-	}
+}
 
 	return (
 		<>
