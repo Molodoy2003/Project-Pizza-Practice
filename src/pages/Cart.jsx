@@ -100,6 +100,9 @@ const Cart = ({ cartItems, setCartItems }) => {
 
 	const test = () => {
 		console.log("asd");
+		console.log("asd");
+		console.log("asd");
+		console.log("asd");
 	}
 
 	return (
