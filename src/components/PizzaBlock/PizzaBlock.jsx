@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
 import { PizzaContext } from '../../Context/Context'
-
 
 const PizzaBlockStyles = styled.div`
 	width: 280px;
@@ -149,6 +148,7 @@ const PizzaBlock = ({ id, title, price, imageUrl, sizes, types, onPlus }) => {
 	const [activeSize, setActiveSize] = useState(0)
 	const [count, setCount] = useState(0)
 	const typeNames = ['тонкое', 'сырный борт']
+	const { state, dispatch } = useContext(PizzaContext)
 
 	const onClickPlus = () => {
 		onPlus()

@@ -4,6 +4,10 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { PizzaContext } from '../../Context/Context'
 
+const SearchWrapper = styled.div`
+  position: relative;
+`
+
 const SearchInput = styled.input`
   padding: 10px 40px;
   width: 300px;
@@ -19,17 +23,20 @@ const SearchInput = styled.input`
 const SearchImage = styled(LogoSearch)`
   position: absolute;
   opacity: 0.7;
-  left: 540px;
+  left: 17px;
+  top: 32%;
 `
 
 const CloseImage = styled(LogoClose)`
   cursor: pointer;
   position: absolute;
-  left: 790px;
+  right: 320px;
+  top: 32%;
   opacity: 0.5;
   transition: all 0.3s ease;
   &:hover {
     opacity: 1;
+    transform: scale(1.1)
   }
 `
 
@@ -37,7 +44,7 @@ const Search = () => {
   const { state, dispatch } = useContext(PizzaContext)
 
   return (
-    <>
+    <SearchWrapper>
       <SearchImage size={15} />
       <SearchInput
         value={state.searchValue}
@@ -61,7 +68,7 @@ const Search = () => {
           }
         />
       )}
-    </>
+    </SearchWrapper>
   )
 }
 

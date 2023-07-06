@@ -80,7 +80,7 @@ const ButtonDelimiter = styled.div`
 
 const Header = () => {
   const {state, dispatch} = useContext(PizzaContext)
-
+  
   return (
     <HeaderStyles>
       <HeaderContainer>

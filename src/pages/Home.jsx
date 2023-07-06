@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 import styled from 'styled-components'
 import { PizzaContext } from '../Context/Context'
-import PizzaBlock from '../components/PizzaBlock/PizzaBlock'
 import Categories from '../components/Categories/Categories'
+import Header from '../components/Header/Header'
+import PizzaBlock from '../components/PizzaBlock/PizzaBlock'
 import Sort from '../components/Sort/Sort'
 import { getCartItems, getItems, onAddToPizza } from '../services/requests'
-import Header from '../components/Header/Header'
 
 const ContentTop = styled.div`
 	display: flex;
@@ -25,8 +26,13 @@ const Home = ({ setCartItems }) => {
 	const { state, dispatch } = useContext(PizzaContext)
 
 	const addPizza = (item, setCartItems) => {
-		onAddToPizza(item, setCartItems)
-		setCartItems(prev => [...prev, item])
+		onAddToPizza(item)
+		// setCartItems(prev => [...prev, item])
+		dispatch({
+			type: 'addCartItem',
+			payload: item,
+		})
+		notify()
 	}
 
 	useEffect(() => {
@@ -43,12 +49,29 @@ const Home = ({ setCartItems }) => {
 				payload: res.data,
 			})
 		})
+
 		window.scrollTo(0, 0)
 	}, [state.categoryId, state.sort, state.searchValue])
 
+	const notify = () => toast.success('Пицца успешно добавлена в корзину.')
+
 	return (
 		<>
-		  <Header/>
+			<Toaster
+				toastOptions={{
+					className: '',
+					duration: 1000,
+					style: {
+						border: '1px solid #007124',
+						backgroundColor: '#007124',
+						padding: '5px 15px',
+						color: '#e7e7e7',
+						fontWeight: '600',
+						width: '300px',
+					},	
+				}}
+			/>
+			<Header />
 			<ContentTop>
 				<Categories />
 				<Sort />
@@ -57,7 +80,7 @@ const Home = ({ setCartItems }) => {
 			<ContentItems>
 				{state.items.map(item => (
 					<PizzaBlock
-					setCartItems={setCartItems}
+						setCartItems={setCartItems}
 						key={item.id}
 						{...item}
 						onPlus={() => addPizza(item, setCartItems)}

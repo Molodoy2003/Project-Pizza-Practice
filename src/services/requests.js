@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 
 export const getItems = async (categoryId, sortType, searchValue) => {

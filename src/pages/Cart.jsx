@@ -1,10 +1,12 @@
 import { CloseCircle as CloseItem } from '@styled-icons/ionicons-outline/CloseCircle'
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components'
+import { PizzaContext } from '../Context/Context'
 import CartBottom from '../components/CartBottom/CartBottom'
 import CartTop from '../components/CartTop/CartTop'
 import Header from '../components/Header/Header'
-import { onRemovePizza } from '../services/requests.js'
+import { getCartItems, onRemovePizza } from '../services/requests.js'
+import toast, { Toaster } from 'react-hot-toast'
 
 const CartStyles = styled.div`
 	max-width: 820px;
@@ -93,25 +95,51 @@ const CloseIcon = styled(CloseItem)`
 `
 
 const Cart = ({ cartItems, setCartItems }) => {
-	const removePizza = (id, setCartItems) => {
-		onRemovePizza(id, setCartItems)
-		setCartItems(prev => prev.filter(item => item.id !== id))
-}
+	const { state, dispatch } = useContext(PizzaContext)
 
-	const test = () => {
-		console.log("asd");
-		console.log("asd");
-		console.log("asd");
-		console.log("asd");
+	const removePizza = (id, setCartItems) => {
+		// onRemovePizza(id, setCartItems)
+		setCartItems(prev => prev.filter(item => item.id !== id))
+		dispatch({
+			type: 'removeCartItem',
+			payload: id,
+		})
+		onRemovePizza(id)
+		notify()
 	}
+
+	useEffect(() => {
+		getCartItems().then(res => {
+			dispatch({
+				type: 'cartItems',
+				payload: res.data,
+			})
+		})
+	}, [])
+
+	const notify = () => toast.success('Пицца успешно удалена из корзины.')
 
 	return (
 		<>
+			<Toaster
+				toastOptions={{
+					className: '',
+					duration: 1000,
+					style: {
+						border: '1px solid #007124',
+						backgroundColor: '#007124',
+						padding: '5px 15px',
+						color: '#e7e7e7',
+						fontWeight: '600',
+						width: '300px',
+					},
+				}}
+			/>
 			<Header />
 			<CartStyles>
 				<CartTop setCartItems={setCartItems} />
 				<CartItems>
-					{cartItems.map(item => (
+					{state.cartItems.map(item => (
 						<CartStl>
 							<CartImg>
 								<PizzaImage src={item.imageUrl} alt='Pizza' />

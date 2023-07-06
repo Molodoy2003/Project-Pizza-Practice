@@ -62,11 +62,8 @@ const CartTop = ({ setCartItems }) => {
           fill='none'
           xmlns='http://www.w3.org/2000/svg'
         ></svg>
-        Корзина
+        {state.cartItems.length === 0 ? 'На данный момент в корзине нет товаров' : 'Корзина'}
       </CartTitle>
-      <CartClear onClick={onClearCart}>
-        <span>Очистить корзину</span>
-      </CartClear>
     </CartTopStyles>
   )
 }
